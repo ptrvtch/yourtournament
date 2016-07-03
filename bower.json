@@ -1,0 +1,21 @@
+{
+  "name": "yt",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Oleg Omelchenko <ptrvtch@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.5.7",
+    "bootstrap": "^3.3.6"
+  }
+}
