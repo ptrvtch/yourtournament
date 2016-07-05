@@ -17,7 +17,7 @@
         function register() {
             console.log('registered');
             $uibModalInstance.close('registered');
-            AuthFactory.register(vm.email, vm.username, vm.password).then(function(response) {
+            AuthFactory.register(vm.email, vm.username, vm.password1, vm.password2).then(function(response) {
                  $uibModalInstance.close(response.data);
             },
             function(errors) {

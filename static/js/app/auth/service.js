@@ -8,11 +8,12 @@
     AuthFactory.$inject = ['$cookies', '$http'];
 
     function AuthFactory($cookies, $http) {
-        function register(email, username, password) {
-            return $http.post('/api/users/', {
+        function register(email, username, password1, password2) {
+            return $http.post('/rest-auth/registration/', {
                 "username": username,
                 "email": email,
-                "password": password
+                "password1": password1,
+                "password2": password2
             })
         }
 
