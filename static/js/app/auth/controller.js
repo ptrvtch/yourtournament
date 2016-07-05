@@ -5,18 +5,28 @@
         .module('yt')
         .controller('AuthController', AuthController);
 
-    AuthController.$inject = ['$location', '$scope', 'AuthFactory'];
+    AuthController.$inject = ['$uibModalInstance', '$scope', 'AuthFactory'];
 
-    function AuthController($location, $scope, AuthFactory) {
+    function AuthController($uibModalInstance, $scope, AuthFactory) {
         var vm = this;
         
         vm.register = register;
+        // vm.ok = ok;
+        vm.cancel = cancel;
 
         function register() {
-            console.log(vm.email, vm.username, vm.password);
+            console.log('registered');
+            $uibModalInstance.close('registered');
             AuthFactory.register(vm.email, vm.username, vm.password).then(function(response) {
-                console.log(response.data);
+                 $uibModalInstance.close(response.data);
+            },
+            function(errors) {
+                console.log(errors.data);
             })
+        }
+
+        function cancel() {
+            $uibModalInstance.dismiss('cancel');
         }
     }
 })();
