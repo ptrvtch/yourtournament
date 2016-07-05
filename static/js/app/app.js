@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('yt', ['ngCookies', 'ngRoute'])
+        .module('yt', ['ngCookies', 'ngRoute', 'ui.bootstrap'])
         .config(config)
         .run(run);
 
@@ -23,7 +23,7 @@
             }
         ).when(
             '/', {
-                controller: 'MainPageController',
+                controller: 'MainController',
                 controllerAs: 'vm',
                 templateUrl: '/static/index.html'
             }
