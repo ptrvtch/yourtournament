@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <uib-tabset active="active" justified=true>
+        <uib-tabset active="active" justified=true id="authModal">
             <uib-tab index="0" heading="Sign Up">
                 <div class="well">
                     <form role="form" name="signupForm">
@@ -14,6 +14,9 @@
                                    placeholder=""
                                    required="required"
                             />
+                            <p class="text-danger" ng-show="vm.errors['email']">
+                                {$ vm.errors['email'].toString() $}
+                            </p>
                         </div>
 
                         <div class="form-group">
@@ -26,6 +29,9 @@
                                    placeholder=""
                                    required="required"
                             />
+                            <p class="text-danger" ng-show="vm.errors['username']">
+                                {$ vm.errors['username'].toString() $}
+                            </p>
                         </div>
 
                         <div class="form-group">
@@ -38,6 +44,9 @@
                                    placeholder=""
                                    required="required"
                             />
+                            <p class="text-danger" ng-show="vm.errors['password1']">
+                                {$ vm.errors['password1'].toString() $}
+                            </p>
                         </div>
 
                         <div class="form-group">
@@ -50,11 +59,14 @@
                                    placeholder=""
                                    required="required"
                             />
+                            <p class="text-danger" ng-show="vm.errors['password1']">
+                                {$ vm.errors['password1'].toString() $}
+                            </p>
                         </div>
                         <div class="form-group">
                             <button type='button'
                                     class="btn btn-primary"
-                                    ng-disabled="signupForm.$invalid"
+                                    ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
                                     ng-click="vm.signup()">
                                 Sign Up
                             </button>
@@ -86,11 +98,15 @@
                             <input type="password"
                                    class="form-control"
                                    id="register__password"
-                                   ng-model="vm.password1"
+                                   ng-model="vm.password"
                                    placeholder="" required="required"
                             />
                         </div>
-                        {$ 'form is ' + signinForm.$valid $}
+                        <div class="form-group" ng-show="vm.non_field_errors">
+                            <p class="text-danger">
+                                {$ vm.non_field_errors $}
+                            </p>
+                        </div>
                         <div class="form-group">
                             <button type='button'
                                     class="btn btn-primary"

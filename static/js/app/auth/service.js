@@ -17,8 +17,16 @@
             })
         }
 
+        function login(username, password) {
+            return $http.post('/rest-auth/login/', {
+                "username": username,
+                "password": password
+            })
+        }
+
         return {
-            register: register
+            register: register,
+            login: login
         }
     }
 })();
