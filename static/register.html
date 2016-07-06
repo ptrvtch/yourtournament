@@ -1,34 +1,113 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <h1>Register</h1>
+        <uib-tabset active="active" justified=true>
+            <uib-tab index="0" heading="Sign Up">
+                <div class="well">
+                    <form role="form" name="signupForm">
+                        <div class="form-group">
+                            <label for="register__email">Email</label>
+                            <input type="email"
+                                   name="email"
+                                   class="form-control"
+                                   id="register__email"
+                                   ng-model="vm.email"
+                                   placeholder=""
+                                   required="required"
+                            />
+                        </div>
 
-        <div class="well">
-            <form role="form" >
-                <div class="form-group">
-                    <label for="register__email">Email</label>
-                    <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="" />
-                </div>
+                        <div class="form-group">
+                            <label for="register__username">Username</label>
+                            <input type="text"
+                                   name="username"
+                                   class="form-control"
+                                   id="register__username"
+                                   ng-model="vm.username"
+                                   placeholder=""
+                                   required="required"
+                            />
+                        </div>
 
-                <div class="form-group">
-                    <label for="register__username">Username</label>
-                    <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="" />
-                </div>
+                        <div class="form-group">
+                            <label for="register__password">Password</label>
+                            <input type="password"
+                                   name="password1"
+                                   class="form-control"
+                                   id="register__password"
+                                   ng-model="vm.password1"
+                                   placeholder=""
+                                   required="required"
+                            />
+                        </div>
 
-                <div class="form-group">
-                    <label for="register__password">Password</label>
-                    <input type="password" class="form-control" id="register__password" ng-model="vm.password1" placeholder="" />
+                        <div class="form-group">
+                            <label for="register__password">Confirm password</label>
+                            <input type="password"
+                                   name="password2"
+                                   class="form-control"
+                                   id="register__password"
+                                   ng-model="vm.password2"
+                                   placeholder=""
+                                   required="required"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <button type='button'
+                                    class="btn btn-primary"
+                                    ng-disabled="signupForm.$invalid"
+                                    ng-click="vm.signup()">
+                                Sign Up
+                            </button>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    ng-click="vm.cancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Sign In">
+                <div class="well">
+                    <form role="form" name="signinForm">
+                        <div class="form-group">
+                            <label for="register__username">Username</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="register__username"
+                                   ng-model="vm.username"
+                                   placeholder=""
+                                   required="required"
+                            />
+                        </div>
 
-                <div class="form-group">
-                    <label for="register__password">Confirm password</label>
-                    <input type="password" class="form-control" id="register__password" ng-model="vm.password2" placeholder="" />
+                        <div class="form-group">
+                            <label for="register__password">Password</label>
+                            <input type="password"
+                                   class="form-control"
+                                   id="register__password"
+                                   ng-model="vm.password1"
+                                   placeholder="" required="required"
+                            />
+                        </div>
+                        {$ 'form is ' + signinForm.$valid $}
+                        <div class="form-group">
+                            <button type='button'
+                                    class="btn btn-primary"
+                                    ng-disabled="signinForm.$invalid"
+                                    ng-click="vm.login()">
+                                Login
+                            </button>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    ng-click="vm.cancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
+            </uib-tab>
+        </uib-tabset>
 
-                <div class="form-group">
-                    <button type='button' class="btn btn-primary" ng-click="vm.register()">Submit</button>
-                    <button type="button" class="btn btn-primary" ng-click="vm.cancel()">Cancel</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
