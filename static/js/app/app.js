@@ -48,7 +48,7 @@
                     'request': function(config) {
                         config.headers = config.headers || {};
                         if ($localStorage.token) {
-                            config.headers.Authorization = 'Bearer ' + $localStorage.token;
+                            config.headers.Authorization = 'Token ' + $localStorage.token;
                         }
                         return config;
                     },

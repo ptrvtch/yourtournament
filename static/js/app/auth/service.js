@@ -5,9 +5,9 @@
         .module('yt')
         .factory('AuthFactory', AuthFactory);
 
-    AuthFactory.$inject = ['$cookies', '$http'];
+    AuthFactory.$inject = ['$localStorage', '$http'];
 
-    function AuthFactory($cookies, $http) {
+    function AuthFactory($localStorage, $http) {
         function register(email, username, password1, password2) {
             return $http.post('/rest-auth/registration/', {
                 "username": username,
@@ -24,9 +24,20 @@
             })
         }
 
+        function logout() {
+            delete $localStorage.token;
+            return $http.post('/rest-auth/logout/');
+        }
+
+        function getCurrentUser() {
+            return $http.get('/rest-auth/user/');
+        }
+
         return {
             register: register,
-            login: login
+            login: login,
+            logout: logout,
+            getCurrentUser: getCurrentUser
         }
     }
 })();
