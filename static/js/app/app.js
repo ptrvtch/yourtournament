@@ -28,16 +28,26 @@
 
         // $urlRouterProvider.otherwise('/');
 
-        $stateProvider.state('auth', {
+        $stateProvider
+            .state('main', {
+                url: '/',
+                controller: 'MainController',
+                controllerAS: 'vm',
+                views: {
+                    'navbar': {
+                        templateUrl: '/static/navbar.html',
+                        controller: 'MainController as vm'
+                    },
+                    'content': {
+                        templateUrl: '/static/index.html',
+                        controller: 'MainController as vm'
+                    }
+                }
+            })
+            .state('auth', {
                 url: '/register',
                 templateUrl: '/static/register.html',
                 controller: 'AuthController',
-                controllerAS: 'vm'
-            })
-            .state('main', {
-                url: '/',
-                templateUrl: '/static/index.html',
-                controller: 'MainController',
                 controllerAS: 'vm'
             });
 
