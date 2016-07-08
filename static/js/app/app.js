@@ -2,20 +2,22 @@
     'use strict';
 
     angular
-        .module('yt', ['ngCookies', 'ngRoute', 'ngStorage', 'ui.bootstrap'])
+        .module('yt', ['ngCookies', 'ui.router', 'ngStorage', 'ui.bootstrap'])
         .config(config)
         .run(run);
 
     config.$inject = [
         '$interpolateProvider',
         '$locationProvider',
-        '$routeProvider',
+        '$stateProvider',
+        '$urlRouterProvider',
         '$httpProvider'
     ];
 
     function config($interpolateProvider,
                     $locationProvider,
-                    $routeProvider,
+                    $stateProvider,
+                    $urlRouterProvider,
                     $httpProvider
     ) {
         $interpolateProvider.startSymbol('{$');
@@ -24,20 +26,35 @@
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
-        $routeProvider.when(
-            '/register', {
+        // $urlRouterProvider.otherwise('/');
+
+        $stateProvider.state('auth', {
+                url: '/register',
+                templateUrl: '/static/register.html',
                 controller: 'AuthController',
-                controllerAs: 'vm',
-                templateUrl: '/static/register.html'
-            }
-        ).when(
-            '/', {
+                controllerAS: 'vm'
+            })
+            .state('main', {
+                url: '/',
+                templateUrl: '/static/index.html',
                 controller: 'MainController',
-                controllerAs: 'vm',
-                templateUrl: '/static/index.html'
-            }
-        )
-            .otherwise('/');
+                controllerAS: 'vm'
+            });
+
+        // $routeProvider.when(
+        //     '/register', {
+        //         controller: 'AuthController',
+        //         controllerAs: 'vm',
+        //         templateUrl: '/static/register.html'
+        //     }
+        // ).when(
+        //     '/', {
+        //         controller: 'MainController',
+        //         controllerAs: 'vm',
+        //         templateUrl: '/static/index.html'
+        //     }
+        // )
+        //     .otherwise('/');
 
         $httpProvider.interceptors.push([
             '$q',
