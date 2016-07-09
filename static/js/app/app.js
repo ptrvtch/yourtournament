@@ -26,7 +26,7 @@
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
-        // $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('main', {
@@ -45,7 +45,7 @@
                 }
             })
             .state('auth', {
-                url: '/register',
+                url: '/login',
                 templateUrl: '/static/register.html',
                 controller: 'AuthController',
                 controllerAS: 'vm'
@@ -66,7 +66,7 @@
                     },
                     'responseError': function(response) {
                         if (response.status === 401 || response.status === 403) {
-                            $location.path('/signin');
+                            $location.path('/login');
                         }
                         return $q.reject(response);
                     }

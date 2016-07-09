@@ -57,5 +57,11 @@
                 $uibModalInstance.close($localStorage.user);
             })
         }
+
+        vm.activate = function() {
+            vm.authenticated = !!$localStorage.token;
+        }
+
+        vm.activate();
     }
 })();

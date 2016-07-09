@@ -20,6 +20,7 @@
 
 
         function openModal(state) {
+            
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: '/static/register.html',
