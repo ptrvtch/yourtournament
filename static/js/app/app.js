@@ -51,21 +51,6 @@
                 controllerAS: 'vm'
             });
 
-        // $routeProvider.when(
-        //     '/register', {
-        //         controller: 'AuthController',
-        //         controllerAs: 'vm',
-        //         templateUrl: '/static/register.html'
-        //     }
-        // ).when(
-        //     '/', {
-        //         controller: 'MainController',
-        //         controllerAs: 'vm',
-        //         templateUrl: '/static/index.html'
-        //     }
-        // )
-        //     .otherwise('/');
-
         $httpProvider.interceptors.push([
             '$q',
             '$location',
