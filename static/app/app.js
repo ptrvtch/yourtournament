@@ -56,10 +56,12 @@
                     'navbar': {
                         templateUrl: '/static/app/navbar.html',
                         controller: 'MainController as vm'
+                    },
+                    'content': {
+                        templateUrl: '/static/app/association/index.html',
+                        controller: 'AssociationController as vm'
                     }
-                },
-                controller: 'AssociationController',
-                controllerAs: 'vm'
+                }
             });
 
         $httpProvider.interceptors.push([

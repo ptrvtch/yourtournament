@@ -5,9 +5,9 @@
         .module('yt')
         .controller('AuthController', AuthController);
 
-    AuthController.$inject = ['$uibModalInstance', '$scope', 'AuthFactory', '$localStorage', 'active'];
+    AuthController.$inject = ['$uibModalInstance', '$state', 'AuthFactory', '$localStorage', 'active'];
 
-    function AuthController($uibModalInstance, $scope, AuthFactory, $localStorage, active) {
+    function AuthController($uibModalInstance, $state, AuthFactory, $localStorage, active) {
         var vm = this;
         
         vm.signup = signup;
@@ -55,6 +55,7 @@
             AuthFactory.getCurrentUser().then(function(res){
                 $localStorage.user = res.data;
                 $uibModalInstance.close($localStorage.user);
+                $state.go('myAssociations');
             })
         }
 

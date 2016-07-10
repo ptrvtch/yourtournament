@@ -5,9 +5,9 @@
         .module('yt')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$scope', '$uibModal', 'AuthFactory', '$localStorage'];
+    MainController.$inject = ['$state', '$uibModal', 'AuthFactory', '$localStorage'];
 
-    function MainController($scope, $uibModal, AuthFactory, $localStorage) {
+    function MainController($state, $uibModal, AuthFactory, $localStorage) {
         var vm = this;
 
         vm.openSignIn = function() {
@@ -41,11 +41,15 @@
             AuthFactory.logout().then(function() {
                 vm.user = null;
                 $localStorage.user = null;
+                $state.go('main');
             })
         };
 
         vm.activate = function() {
             vm.user = $localStorage.user;
+            if ($localStorage.user) {
+                $state.go('myAssociations');
+            }
         };
 
         vm.activate();
