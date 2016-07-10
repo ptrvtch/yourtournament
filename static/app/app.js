@@ -32,23 +32,34 @@
             .state('main', {
                 url: '/',
                 controller: 'MainController',
-                controllerAS: 'vm',
+                controllerAs: 'vm',
                 views: {
                     'navbar': {
-                        templateUrl: '/static/navbar.html',
+                        templateUrl: '/static/app/navbar.html',
                         controller: 'MainController as vm'
                     },
                     'content': {
-                        templateUrl: '/static/index.html',
+                        templateUrl: '/static/app/index.html',
                         controller: 'MainController as vm'
                     }
                 }
             })
             .state('auth', {
                 url: '/login',
-                templateUrl: '/static/register.html',
+                templateUrl: '/static/app/auth/register.html',
                 controller: 'AuthController',
-                controllerAS: 'vm'
+                controllerAs: 'vm'
+            })
+            .state('myAssociations', {
+                url: '/associations',
+                views: {
+                    'navbar': {
+                        templateUrl: '/static/app/navbar.html',
+                        controller: 'MainController as vm'
+                    }
+                },
+                controller: 'AssociationController',
+                controllerAs: 'vm'
             });
 
         $httpProvider.interceptors.push([

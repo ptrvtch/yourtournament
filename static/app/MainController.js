@@ -23,7 +23,7 @@
             
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/static/register.html',
+                templateUrl: '/static/app/auth/register.html',
                 controller: 'AuthController',
                 controllerAs: 'vm',
                 size: 'lg',

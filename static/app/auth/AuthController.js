@@ -58,10 +58,10 @@
             })
         }
 
-        vm.activate = function() {
+        function activate() {
             vm.authenticated = !!$localStorage.token;
         }
 
-        vm.activate();
+        activate();
     }
 })();

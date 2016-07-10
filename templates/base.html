@@ -9,7 +9,6 @@
     <!-- Bootstrap -->
 {#    <link rel="stylesheet" href="{% static "bower/bootstrap/dist/css/bootstrap.css" %}">#}
     <link rel="stylesheet" href="{% static "bower/bower-bootswatch-paper/css/paper.css" %}">
-    <link rel="stylesheet" href="{% static "css/custom.css" %}">
     <script src="{% static "bower/jquery/dist/jquery.js" %}"></script>
     <script src="{% static "bower/bootstrap/dist/js/bootstrap.js" %}"></script>
     <!-- Material design fonts and icons -->
@@ -26,10 +25,12 @@
     <script src="{% static "bower/angular-bootstrap/ui-bootstrap-tpls.js" %}"></script>
 
     <!-- AngularJS app scripts -->
-    <script src="{% static "js/app/app.js" %}"></script>
-    <script src="{% static "js/app/auth/AuthFactory.js" %}"></script>
-    <script src="{% static "js/app/auth/AuthController.js" %}"></script>
-    <script src="{% static "js/app/MainController.js" %}"></script>
+    <script src="{% static "app/app.js" %}"></script>
+    <script src="{% static "app/auth/AuthFactory.js" %}"></script>
+    <script src="{% static "app/ApiFactory.js" %}"></script>
+    <script src="{% static "app/auth/AuthController.js" %}"></script>
+    <script src="{% static "app/MainController.js" %}"></script>
+    <script src="{% static "app/association/AssociationController.js" %}"></script>
     <base href="/" />
 </head>
 
