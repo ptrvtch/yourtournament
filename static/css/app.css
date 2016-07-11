@@ -5,7 +5,7 @@ body {
 .association {
     height: 300px;
     border: 1px solid rgba(128, 128, 128, 0.2);
-    padding: 10px;
+    padding: 15px;
     margin-bottom: 25px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
@@ -26,6 +26,30 @@ body {
 
 .association .input-group {
     width: 100%;
+}
+
+.association #cancelButton {
+    float: right;
+}
+
+.association .control {
+    position: absolute;
+    top:0;
+    right:20px;
+    font-size: 130%;
+    transition: visibility 0.3s linear, opacity 0.3s linear;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.association:hover .control {
+    transition: visibility 0.3s linear, opacity 0.3s linear;
+    visibility: initial;
+    opacity:1;
+}
+
+.association span {
+    padding: 0 5px;
 }
 
 .new {
