@@ -7,7 +7,8 @@
             'ui.router',
             'ngStorage',
             'ui.bootstrap',
-            'angular-loading-bar'
+            'angular-loading-bar',
+            'pascalprecht.translate'
         ])
         .config(config)
         .run(run);
@@ -18,7 +19,8 @@
         '$stateProvider',
         '$urlRouterProvider',
         '$httpProvider',
-        'cfpLoadingBarProvider'
+        'cfpLoadingBarProvider',
+        '$translateProvider'
     ];
 
     function config($interpolateProvider,
@@ -26,7 +28,8 @@
                     $stateProvider,
                     $urlRouterProvider,
                     $httpProvider,
-                    cfpLoadingBarProvider
+                    cfpLoadingBarProvider,
+                    $translateProvider
     ) {
         $interpolateProvider.startSymbol('{$');
         $interpolateProvider.endSymbol('$}');
@@ -93,9 +96,19 @@
                     }
                 }
             }
-        ])
+        ]);
 
         cfpLoadingBarProvider.includeSpinner = false;
+        
+        $translateProvider.useStaticFilesLoader({
+            prefix: '/static/lang/',
+            suffix: '.json'
+        });
+        $translateProvider.preferredLanguage('ru');
+        
+        // Uncomment in production
+        // $translateProvider.useLocalStorage();
+        $translateProvider.useSanitizeValueStrategy('escape');
     }
     
     run.$inject = ['$http'];

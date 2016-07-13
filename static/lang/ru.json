@@ -1,0 +1,19 @@
+{
+  "auth": "Аутентификация",
+  "auth.signin": "Вход",
+  "auth.signup": "Регистрация",
+  "auth.logout": "Выход",
+  "auth.email": "E-mail",
+  "auth.username": "Имя пользователя",
+  "auth.password": "Пароль",
+  "auth.password2": "Подтвердите пароль",
+  "auth.cancel": "Отмена",
+  "main.slogan": "Создайте свой собственный турнир!",
+  "as.name": "Имя ассоциации",
+  "as.name.invalid": "Это поле не должно быть пустым.",
+  "as.desc": "Описание ассоциации",
+  "as.desc.invalid": "Не более 100 символов.",
+  "as.add": "Добавить",
+  "as.edit": "Изменить",
+  "as.cancel": "Отмена"
+}

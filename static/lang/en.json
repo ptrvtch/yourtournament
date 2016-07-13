@@ -1,0 +1,19 @@
+{
+  "auth": "Authenticate",
+  "auth.signin": "Sign in",
+  "auth.signup": "Sign up",
+  "auth.logout": "Logout",
+  "auth.email": "E-mail",
+  "auth.username": "Username",
+  "auth.password": "Password",
+  "auth.password2": "Confirm password",
+  "auth.cancel": "cancel",
+  "main.slogan": "Make the tournament with your own rules!",
+  "as.name": "Association name",
+  "as.name.invalid": "This field should not be empty",
+  "as.desc": "Association description",
+  "as.desc.invalid": "No more than 100 symbols.",
+  "as.add": "Add",
+  "as.edit": "Edit",
+  "as.cancel": "Cancel"
+}
