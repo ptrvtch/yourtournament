@@ -7,8 +7,7 @@
             'ui.router',
             'ngStorage',
             'ui.bootstrap',
-            'angular-loading-bar',
-            'ngAnimate'
+            'angular-loading-bar'
         ])
         .config(config)
         .run(run);

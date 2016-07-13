@@ -21,8 +21,8 @@
         vm.confirmEditAssociation = confirmEditAssociation;
 
         function addNewAssociation() {
-            vm.isCreating = true;
             vm.newAssociation = {};
+            vm.isCreating = true;
         }
 
         function editAssociation(association) {
@@ -49,12 +49,10 @@
         
         function cancel () {
             vm.isCreating = false;
-            console.log(vm.isCreating);
         }
         
         function cancelEdit() {
             vm.isEditing = false;
-            console.log(vm.associations);
         }
 
         function cancelDelete() {
