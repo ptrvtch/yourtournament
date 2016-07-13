@@ -66,7 +66,7 @@
                                 {$ vm.errors['password1'].toString() $}
                             </p>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group button-group">
                             <button type='submit'
                                     class="btn btn-primary"
                                     ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
@@ -110,7 +110,7 @@
                                 {$ vm.non_field_errors $}
                             </p>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group button-group">
                             <button type='submit'
                                     class="btn btn-primary"
                                     ng-disabled="signinForm.$invalid"
@@ -127,6 +127,5 @@
                 </div>
             </uib-tab>
         </uib-tabset>
-
     </div>
 </div>

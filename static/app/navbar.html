@@ -13,9 +13,6 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="/swagger">Swagger</a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="!!vm.user"><a href="/profile">{$ vm.user.username $}</a></li>
                 <li ng-hide="!!vm.user"><a href="" ng-click="vm.openSignIn()">Sign in</a></li>

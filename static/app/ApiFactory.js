@@ -9,17 +9,23 @@
 
     function ApiFactory($http, $localStorage) {
 
-        function getMyAssociations() {
-            return $http.get('/api/associations/my/')
-        }
-
-        function createAssociation(data) {
-            return $http.post('/api/associations/', data);
-        }
+        var associations = {
+            get: function() {
+                return $http.get('/api/associations/my/')
+            },
+            create: function(data) {
+                return $http.post('/api/associations/', data);
+            },
+            delete: function(id) {
+                return $http.delete('/api/associations/' + id)
+            },
+            edit: function(id, data) {
+                return $http.patch('/api/associations/' + id + '/', data)
+            }
+        };
 
         return {
-            getMyAssociations: getMyAssociations,
-            createAssociation: createAssociation
+            associations: associations
         }
     }
 })();

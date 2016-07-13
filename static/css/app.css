@@ -3,7 +3,7 @@ body {
 }
 
 .association {
-    height: 300px;
+    height: 350px;
     border: 1px solid rgba(128, 128, 128, 0.2);
     padding: 15px;
     margin-bottom: 25px;
@@ -20,7 +20,6 @@ body {
 }
 
 .association p {
-    overflow-y: scroll;
     max-height: 75%;
 }
 
@@ -34,7 +33,7 @@ body {
 
 .association .control {
     position: absolute;
-    top:0;
+    top:5px;
     right:20px;
     font-size: 130%;
     transition: visibility 0.3s linear, opacity 0.3s linear;
@@ -48,8 +47,13 @@ body {
     opacity:1;
 }
 
-.association span {
+.association h4 {
+    word-wrap: break-word;
+}
+
+.association .glyphicon {
     padding: 0 5px;
+    cursor: pointer;
 }
 
 .new {
@@ -61,5 +65,6 @@ body {
     cursor: pointer;
     display: block;
     text-align: center;
-    font-size:60px;
+    font-size: 100px;
+    line-height: 3;
 }

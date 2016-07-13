@@ -2,42 +2,97 @@
     <div class="row" ng-show="vm.associationsLoaded">
         <div class="col-xs-6 col-sm-4 col-md-3" ng-repeat="association in vm.associations">
             <div class="association">
-                <div class="control">
-                    <span class="glyphicon glyphicon-edit"aria-hidden="true"></span>
-                    <span class="glyphicon glyphicon-remove"aria-hidden="true"></span>
+                <div class="association-info" ng-hide="vm.isEditing && (vm.editedAssociation.id == association.id)">
+                    <div class="control">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"
+                          ng-click="vm.editAssociation(association)"></span>
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"
+                          ng-click="vm.deleteAssociation(association)"></span>
+                    </div>
+                    <h4>{$ association.name $}</h4>
+                    <p>
+                        {$ association.description $}
+                    </p>
                 </div>
-                <h4>{$ association.name $}</h4>
-                <p>
-                    {$ association.description $}
-                </p>
+                <form name="editForm"
+                      ng-if="vm.isEditing && (vm.editedAssociation.id == association.id)"
+                      ng-submit="vm.confirmEditAssociation()">
+                    <div class="form-group">
+                        <input type="text"
+                               class="form-control"
+                               name="name"
+                               placeholder="Association name"
+                               ng-required="true"
+                               ng-model="vm.editedAssociation.name">
+                    </div>
+                    <div class="form-group">
+                        <p class="text-danger">
+                            <span ng-show="editForm.name.$invalid">This field should not be empty</span>&nbsp;
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control"
+                                  placeholder="Enter description here"
+                                  name="description"
+                                  rows="4"
+                                  ng-maxlength="100"
+                                  ng-model="vm.editedAssociation.description">
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <p class="text-danger">
+                            <span ng-show="editForm.description.$invalid">No more than 100 symbols.</span>&nbsp;
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-lg"
+                                type="submit"
+                                ng-disabled="editForm.$invalid">Edit</button>
+                        <button class="btn btn-default btn-lg"
+                                id="cancelButton"
+                                ng-click="vm.cancelEdit()">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-3">
             <div class="association new">
                 <a ng-click="vm.addNewAssociation()" ng-hide="vm.isCreating">
-                    <h4>
-                        Create Association
-                    </h4>
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </a>
-                <form ng-if="vm.isCreating" ng-submit="vm.createAssociation()">
+                <form name="createForm"
+                      ng-if="vm.isCreating"
+                      ng-submit="vm.createAssociation()">
                     <div class="form-group">
                         <input type="text"
                                class="form-control"
+                               name="name"
                                placeholder="Association name"
                                ng-required="true"
                                ng-model="vm.newAssociation.name">
                     </div>
                     <div class="form-group">
+                        <p class="text-danger">
+                            <span ng-show="createForm.name.$invalid && createForm.name.$touched">This field should not be empty</span>&nbsp;
+                        </p>
+                    </div>
+                    <div class="form-group">
                         <textarea class="form-control"
                                   placeholder="Enter description here"
-                                  rows="5"
+                                  name="description"
+                                  rows="4"
                                   ng-maxlength="100"
                                   ng-model="vm.newAssociation.description">
                         </textarea>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-lg" type="submit">Add</button>
+                        <p class="text-danger">
+                            <span ng-show="createForm.description.$invalid">No more than 100 symbols.</span>&nbsp;
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <button ng-disabled="createForm.$invalid"
+                                class="btn btn-primary btn-lg" type="submit">Add</button>
                         <button class="btn btn-default btn-lg" type="reset"
                                 id="cancelButton"
                                 ng-click="vm.cancel()">Cancel</button>

@@ -2,7 +2,14 @@
     'use strict';
 
     angular
-        .module('yt', ['ngCookies', 'ui.router', 'ngStorage', 'ui.bootstrap'])
+        .module('yt', [
+            'ngCookies',
+            'ui.router',
+            'ngStorage',
+            'ui.bootstrap',
+            'angular-loading-bar',
+            'ngAnimate'
+        ])
         .config(config)
         .run(run);
 
@@ -11,14 +18,16 @@
         '$locationProvider',
         '$stateProvider',
         '$urlRouterProvider',
-        '$httpProvider'
+        '$httpProvider',
+        'cfpLoadingBarProvider'
     ];
 
     function config($interpolateProvider,
                     $locationProvider,
                     $stateProvider,
                     $urlRouterProvider,
-                    $httpProvider
+                    $httpProvider,
+                    cfpLoadingBarProvider
     ) {
         $interpolateProvider.startSymbol('{$');
         $interpolateProvider.endSymbol('$}');
@@ -79,13 +88,15 @@
                     },
                     'responseError': function(response) {
                         if (response.status === 401 || response.status === 403) {
-                            $location.path('/login');
+                            $location.path('/');
                         }
                         return $q.reject(response);
                     }
                 }
             }
         ])
+
+        cfpLoadingBarProvider.includeSpinner = false;
     }
     
     run.$inject = ['$http'];
