@@ -68,3 +68,11 @@ body {
     font-size: 100px;
     line-height: 3;
 }
+
+.footer {
+    position: fixed;
+    background-color: #efefef;
+    padding: 20px 0;
+    width: 100%;
+    bottom: 0;
+}
