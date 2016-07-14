@@ -52,6 +52,10 @@
                     'content': {
                         templateUrl: '/static/app/index.html',
                         controller: 'MainController as vm'
+                    },
+                    'footer': {
+                        templateUrl: '/static/app/footer.html',
+                        controller: 'MainController as vm'
                     }
                 }
             })
@@ -71,6 +75,10 @@
                     'content': {
                         templateUrl: '/static/app/association/index.html',
                         controller: 'AssociationController as vm'
+                    },
+                    'footer': {
+                        templateUrl: '/static/app/footer.html',
+                        controller: 'MainController as vm'
                     }
                 }
             });

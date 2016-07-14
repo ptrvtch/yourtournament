@@ -15,5 +15,9 @@
   "as.desc.invalid": "No more than 100 symbols.",
   "as.add": "Add",
   "as.edit": "Edit",
-  "as.cancel": "Cancel"
+  "as.delete": "Delete",
+  "as.cancel": "Cancel",
+  "as.confirmDeleteHeader": "Delete Association",
+  "as.confirmDeleteText": "You are going to delete this association: ",
+  "as.confirmDeleteText2": "Once you do it, you cannot return it back.\nAre you sure?"
 }

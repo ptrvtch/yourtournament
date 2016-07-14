@@ -22,10 +22,12 @@
 
         function addNewAssociation() {
             vm.newAssociation = {};
+            vm.isEditing = false;
             vm.isCreating = true;
         }
 
         function editAssociation(association) {
+            vm.isCreating = false;
             vm.editedAssociation = {
                 name: association['name'],
                 description: association['description'],

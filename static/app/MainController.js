@@ -5,10 +5,14 @@
         .module('yt')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$state', '$uibModal', 'AuthFactory', '$localStorage'];
+    MainController.$inject = ['$state', '$uibModal', 'AuthFactory', '$localStorage', '$translate'];
 
-    function MainController($state, $uibModal, AuthFactory, $localStorage) {
+    function MainController($state, $uibModal, AuthFactory, $localStorage, $translate) {
         var vm = this;
+        vm.languages = [
+            {val: 'en', name: 'English'},
+            {val: 'ru', name: 'Русский'}
+        ];
 
         vm.openSignIn = function() {
             openModal(1);
@@ -45,7 +49,12 @@
             })
         };
 
+        vm.setLanguage = function() {
+            $translate.use(vm.currentLanguage);
+        }
+
         vm.activate = function() {
+            vm.currentLanguage = 'ru';
             vm.user = $localStorage.user;
             if ($localStorage.user) {
                 $state.go('myAssociations');

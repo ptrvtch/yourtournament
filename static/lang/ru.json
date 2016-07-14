@@ -15,5 +15,9 @@
   "as.desc.invalid": "Не более 100 символов.",
   "as.add": "Добавить",
   "as.edit": "Изменить",
-  "as.cancel": "Отмена"
+  "as.delete": "Удалить",
+  "as.cancel": "Отмена",
+  "as.confirmDeleteHeader": "Удалить ассоциацию",
+  "as.confirmDeleteText": "Вы собираетесь удалить ассоциацию: ",
+  "as.confirmDeleteText2": "Отменить данное действие будет невозможно.\nВы уверены?"
 }
