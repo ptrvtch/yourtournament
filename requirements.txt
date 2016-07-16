@@ -6,3 +6,4 @@ drf-extensions==0.2.8
 django-cors-headers
 django-extensions==1.6.1
 djangorestframework-filters==0.8.0
+django-allauth
