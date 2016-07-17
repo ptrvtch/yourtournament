@@ -32,5 +32,8 @@
     "angular-translate-loader-static-files": "^2.11.0",
     "angular-translate-storage-local": "^2.11.0",
     "angular-breadcrumb": "^0.4.1"
+  },
+  "resolutions": {
+    "angular": "1.5.7"
   }
 }
