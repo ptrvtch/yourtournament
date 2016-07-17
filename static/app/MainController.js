@@ -56,9 +56,6 @@
         vm.activate = function() {
             vm.currentLanguage = 'ru';
             vm.user = $localStorage.user;
-            if ($localStorage.user) {
-                $state.go('myAssociations');
-            }
         };
 
         vm.activate();

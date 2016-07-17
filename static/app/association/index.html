@@ -1,12 +1,14 @@
 <div class="container-fluid">
     <div class="row" ng-show="vm.associationsLoaded">
-        <div class="col-xs-6 col-sm-4 col-md-3" ng-repeat="association in vm.associations">
+        <div class="col col-xs-6 col-sm-4 col-md-3" ng-repeat="association in vm.associations">
             <div class="association">
                 <div class="association-info" ng-hide="vm.isEditing && (vm.editedAssociation.id == association.id)">
                     <div class="control">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"
+                          title="{$ 'as.edit' | translate $}"
                           ng-click="vm.editAssociation(association)"></span>
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"
+                          title="{$ 'as.delete' | translate $}"
                           ng-click="vm.deleteAssociation(association)"></span>
                     </div>
                     <h4>{$ association.name $}</h4>
@@ -55,7 +57,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="col col-xs-6 col-sm-4 col-md-3">
             <div class="association new">
                 <a ng-click="vm.addNewAssociation()" ng-hide="vm.isCreating">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

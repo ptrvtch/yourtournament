@@ -8,7 +8,8 @@
             'ngStorage',
             'ui.bootstrap',
             'angular-loading-bar',
-            'pascalprecht.translate'
+            'pascalprecht.translate',
+            'ncy-angular-breadcrumb'
         ])
         .config(config)
         .run(run);
@@ -44,6 +45,9 @@
                 url: '/',
                 controller: 'MainController',
                 controllerAs: 'vm',
+                ncyBreadcrumb: {
+                    label: 'Home'
+                },
                 views: {
                     'navbar': {
                         templateUrl: '/static/app/navbar.html',
@@ -59,14 +63,30 @@
                     }
                 }
             })
-            .state('auth', {
-                url: '/login',
-                templateUrl: '/static/app/auth/register.html',
-                controller: 'AuthController',
-                controllerAs: 'vm'
+            .state('myProfile', {
+                url: '/profile',ncyBreadcrumb: {
+                    label: 'Profile'
+                },
+                views: {
+                    'navbar': {
+                        templateUrl: '/static/app/navbar.html',
+                        controller: 'MainController as vm'
+                    },
+                    'content': {
+                        templateUrl: '/static/app/auth/profile.html',
+                        controller: 'MainController as vm'
+                    },
+                    'footer': {
+                        templateUrl: '/static/app/footer.html',
+                        controller: 'MainController as vm'
+                    }
+                }
             })
             .state('myAssociations', {
                 url: '/associations',
+                ncyBreadcrumb: {
+                    label: 'Associations'
+                },
                 views: {
                     'navbar': {
                         templateUrl: '/static/app/navbar.html',

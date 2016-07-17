@@ -29,6 +29,7 @@
     <script src="{% static "bower/ngstorage/ngStorage.js" %}"></script>
     <script src="{% static "bower/angular-cookies/angular-cookies.js" %}"></script>
     <script src="{% static "bower/angular-ui-router/release/angular-ui-router.js" %}"></script>
+    <script src="{% static "bower/angular-breadcrumb/dist/angular-breadcrumb.js" %}"></script>
     <script src="{% static "bower/ng-token-auth/dist/ng-token-auth.js" %}"></script>
     <script src="{% static "bower/angular-bootstrap/ui-bootstrap-tpls.js" %}"></script>
     <script src="{% static "bower/angular-loading-bar/build/loading-bar.js" %}"></script>
@@ -46,6 +47,7 @@
 <body ng-app="yt">
 <div class="ui-view">
     <div ui-view="navbar"></div>
+    <div ncy-breadcrumb></div>
     <div ui-view="content"></div>
     <div ui-view="footer"></div>
 </div>
