@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 
+from associations.models import Association
+
 
 class TestData(object):
     user_data = {
@@ -22,6 +24,11 @@ class TestData(object):
 
     }
 
+    association_data = {
+        'name': 'Test Association',
+        'description': 'Test description'
+    }
+
 
 class TestMethods(object):
     @classmethod
@@ -31,6 +38,12 @@ class TestMethods(object):
         if credentials['is_active']:
             cls.activate_user(user)
         return user
+
+    @classmethod
+    def create_association(cls, user, **data):
+        association = Association.objects.create(creator=user, **data)
+        return association
+
 
     @classmethod
     def activate_user(cls, user):

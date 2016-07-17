@@ -34,3 +34,5 @@ urlpatterns = [
     url(r'^swagger/', include('rest_framework_swagger.urls')),
     url(r'^$', IndexView.as_view(), name='index'),
 ]
+
+urlpatterns += router.urls

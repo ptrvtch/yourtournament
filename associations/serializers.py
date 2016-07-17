@@ -4,10 +4,10 @@ from associations.models import Association
 
 
 class AssociationSerializer(serializers.ModelSerializer):
-    creator = serializers.HyperlinkedRelatedField(
+    creator = serializers.SlugRelatedField(
         many=False,
         read_only=True,
-        view_name='user-detail'
+        slug_field='username'
     )
 
     class Meta:
