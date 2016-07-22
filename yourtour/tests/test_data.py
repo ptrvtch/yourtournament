@@ -29,6 +29,11 @@ class TestData(object):
         'description': 'Test description'
     }
 
+    league_data = {
+        'name': 'Test league',
+        'description': 'Test descriptoin'
+    }
+
 
 class TestMethods(object):
     @classmethod
