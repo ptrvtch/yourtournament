@@ -9,7 +9,8 @@
             'ui.bootstrap',
             'angular-loading-bar',
             'pascalprecht.translate',
-            'ncy-angular-breadcrumb'
+            'ncy-angular-breadcrumb',
+            'relativeDate'
         ])
         .config(config)
         .run(run);

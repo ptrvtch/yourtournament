@@ -4,6 +4,7 @@
             <div class="association">
                 <div class="association-info" ng-hide="vm.isEditing && (vm.editedAssociation.id == association.id)">
                     <div class="control">
+                    <span class="text-muted" title="{$ association.created |date:'yyyy-MM-dd HH:mm:ss' $}"><small>{$ association.created | relativeDate $}</small></span>
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"
                           title="{$ 'as.edit' | translate $}"
                           ng-click="vm.editAssociation(association)"></span>

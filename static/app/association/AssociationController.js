@@ -66,6 +66,7 @@
                 vm.associations.push({
                     "id": response.data['id'],
                     "name": response.data['name'],
+                    "created": response.data['created'],
                     "description": response.data['description']
                 });
                 vm.isCreating = false;
