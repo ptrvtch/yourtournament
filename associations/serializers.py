@@ -4,12 +4,15 @@ from associations.models import Association
 
 
 class AssociationSerializer(serializers.ModelSerializer):
-    creator = serializers.SlugRelatedField(
+    creator = serializers.PrimaryKeyRelatedField(
         many=False,
         read_only=True,
-        slug_field='username'
+    )
+    leagues = serializers.PrimaryKeyRelatedField(
+        many=True,
+        read_only=True
     )
 
     class Meta:
         model = Association
-        fields = ('id', 'name', 'description', 'creator', )
+        fields = ('id', 'name', 'description', 'creator', 'created', 'leagues')

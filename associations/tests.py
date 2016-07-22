@@ -13,7 +13,7 @@ class AssociationTests(APITestCase):
         self.client.login(username=user.get_username(), password=user_data['password'])
         response = self.client.post(url, association_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['creator'], user.get_username())
+        self.assertEqual(response.data['creator'], user.pk)
 
     def test_update_association(self):
         user_data = TestData.user_data.copy()
