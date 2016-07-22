@@ -16,14 +16,16 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
+
+from leagues.views import LeagueViewSet
 from users.views import UserViewSet
 from associations.views import AssociationViewSet
 from users.views import UserViewSet, IndexView
 
 
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
 router.register(r'associations', AssociationViewSet)
+router.register(r'leagues', LeagueViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
