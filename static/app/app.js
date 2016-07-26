@@ -10,7 +10,8 @@
             'angular-loading-bar',
             'pascalprecht.translate',
             'ncy-angular-breadcrumb',
-            'relativeDate'
+            'relativeDate',
+            'tmh.dynamicLocale'
         ])
         .config(config)
         .run(run);
@@ -22,7 +23,8 @@
         '$urlRouterProvider',
         '$httpProvider',
         'cfpLoadingBarProvider',
-        '$translateProvider'
+        '$translateProvider',
+        'tmhDynamicLocaleProvider'
     ];
 
     function config($interpolateProvider,
@@ -31,7 +33,8 @@
                     $urlRouterProvider,
                     $httpProvider,
                     cfpLoadingBarProvider,
-                    $translateProvider
+                    $translateProvider,
+                    tmhDynamicLocaleProvider
     ) {
         $interpolateProvider.startSymbol('{$');
         $interpolateProvider.endSymbol('$}');
@@ -138,6 +141,9 @@
         // Uncomment in production
         // $translateProvider.useLocalStorage();
         $translateProvider.useSanitizeValueStrategy('escape');
+        $translateProvider.useMissingTranslationHandlerLog();
+
+        tmhDynamicLocaleProvider.localeLocationPattern('/static/bower/angular-i18n/angular-locale_{$locale$}.js');
     }
     
     run.$inject = ['$http'];

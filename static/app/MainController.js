@@ -5,9 +5,9 @@
         .module('yt')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$state', '$uibModal', 'AuthFactory', '$localStorage', '$translate'];
+    MainController.$inject = ['$state', '$uibModal', 'AuthFactory', '$localStorage', '$translate', 'tmhDynamicLocale'];
 
-    function MainController($state, $uibModal, AuthFactory, $localStorage, $translate) {
+    function MainController($state, $uibModal, AuthFactory, $localStorage, $translate, tmhDynamicLocale) {
         var vm = this;
         vm.languages = [
             {val: 'en', name: 'English'},
@@ -51,10 +51,12 @@
 
         vm.setLanguage = function() {
             $translate.use(vm.currentLanguage);
-        }
+            tmhDynamicLocale.set(vm.currentLanguage);
+        };
 
         vm.activate = function() {
             vm.currentLanguage = 'ru';
+            tmhDynamicLocale.set('ru');
             vm.user = $localStorage.user;
         };
 

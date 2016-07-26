@@ -32,7 +32,9 @@
     "angular-translate-loader-static-files": "^2.11.0",
     "angular-translate-storage-local": "^2.11.0",
     "angular-breadcrumb": "^0.4.1",
-    "angular-relative-date": "^2.1.0"
+    "angular-relative-date": "^2.1.0",
+    "angular-dynamic-locale": "^0.1.32",
+    "angular-i18n": "^1.5.8"
   },
   "resolutions": {
     "angular": "1.5.7"
