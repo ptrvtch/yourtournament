@@ -46,65 +46,33 @@
 
         $stateProvider
             .state('main', {
+                abstract: true,
+                templateUrl: '/static/app/main.html',
+                controller: 'MainController as vm'
+            })
+            .state('main.index', {
                 url: '/',
-                controller: 'MainController',
-                controllerAs: 'vm',
+                templateUrl: '/static/app/index.html',
                 ncyBreadcrumb: {
-                    label: 'Home'
-                },
-                views: {
-                    'navbar': {
-                        templateUrl: '/static/app/navbar.html',
-                        controller: 'MainController as vm'
-                    },
-                    'content': {
-                        templateUrl: '/static/app/index.html',
-                        controller: 'MainController as vm'
-                    },
-                    'footer': {
-                        templateUrl: '/static/app/footer.html',
-                        controller: 'MainController as vm'
-                    }
+                    label: 'Homepage'
                 }
             })
-            .state('myProfile', {
-                url: '/profile',ncyBreadcrumb: {
-                    label: 'Profile'
-                },
-                views: {
-                    'navbar': {
-                        templateUrl: '/static/app/navbar.html',
-                        controller: 'MainController as vm'
-                    },
-                    'content': {
-                        templateUrl: '/static/app/auth/profile.html',
-                        controller: 'MainController as vm'
-                    },
-                    'footer': {
-                        templateUrl: '/static/app/footer.html',
-                        controller: 'MainController as vm'
-                    }
-                }
-            })
-            .state('myAssociations', {
+            .state('main.asscns', {
                 url: '/associations',
+                templateUrl: '/static/app/association/index.html',
+                controller: 'AssociationController as vm',
                 ncyBreadcrumb: {
-                    label: 'Associations'
-                },
-                views: {
-                    'navbar': {
-                        templateUrl: '/static/app/navbar.html',
-                        controller: 'MainController as vm'
-                    },
-                    'content': {
-                        templateUrl: '/static/app/association/index.html',
-                        controller: 'AssociationController as vm'
-                    },
-                    'footer': {
-                        templateUrl: '/static/app/footer.html',
-                        controller: 'MainController as vm'
-                    }
+                    label: 'Associations',
+                    parent: 'main.index'
                 }
+            })
+            .state('main.profile', {
+                url: '/profile',
+                ncyBreadcrumb: {
+                    label: 'Profile',
+                    parent :'main.index'
+                },
+                templateUrl: '/static/app/auth/profile.html'
             });
 
         $httpProvider.interceptors.push([

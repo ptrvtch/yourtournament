@@ -45,7 +45,7 @@
             AuthFactory.logout().then(function() {
                 vm.user = null;
                 $localStorage.user = null;
-                $state.go('main');
+                $state.go('main.index');
             })
         };
 
@@ -58,6 +58,7 @@
             vm.currentLanguage = 'ru';
             tmhDynamicLocale.set('ru');
             vm.user = $localStorage.user;
+            $state.go('main.index');
         };
 
         vm.activate();

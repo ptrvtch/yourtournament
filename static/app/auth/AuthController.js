@@ -55,7 +55,7 @@
             AuthFactory.getCurrentUser().then(function(res){
                 $localStorage.user = res.data;
                 $uibModalInstance.close($localStorage.user);
-                $state.go('myAssociations');
+                $state.go('main.asscns');
             })
         }
 
