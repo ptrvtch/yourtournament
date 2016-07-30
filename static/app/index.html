@@ -1,12 +1,14 @@
-<div class="jumbotron">
-    <div class="container">
-        <h1>Your Tournament!</h1>
-        <p>
-            {$ 'main.slogan' | translate $}
-        </p>
-        <p>
-            <a class="btn btn-primary btn-lg" role="button" ng-if="!vm.user" ng-click="vm.openSignUp()">{$ 'auth.signup' | translate $}</a>
-            <a class="btn btn-primary btn-lg" role="button" ng-if="vm.user" ui-sref="main.asscns">{$ 'main.associations' | translate $}</a>
-        </p>
+<div class="container-fluid">
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Your Tournament!</h1>
+            <p>
+                {$ 'main.slogan' | translate $}
+            </p>
+            <p>
+                <a class="btn btn-primary btn-lg" role="button" ng-if="!vm.user" ng-click="vm.openSignUp()">{$ 'auth.signup' | translate $}</a>
+                <a class="btn btn-primary btn-lg" role="button" ng-if="vm.user" ui-sref="main.asscns.list">{$ 'main.associations' | translate $}</a>
+            </p>
+        </div>
     </div>
 </div>
