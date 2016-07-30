@@ -10,7 +10,10 @@
     function ApiFactory($http, $localStorage) {
 
         var associations = {
-            get: function() {
+            get: function(id) {
+                if (id) {
+                    return $http.get('/api/associations/' + id);
+                }
                 return $http.get('/api/associations/my/')
             },
             create: function(data) {
