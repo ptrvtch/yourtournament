@@ -28,6 +28,8 @@
   "a_year_from_now"     : "a year from now",
   "years_from_now"      : "{$time$} years from now",
   "over_a_year_from_now": "over a year from now",
+  "asscn": "Ассоциация",
+  "league": "Лига",
   "auth": "Аутентификация",
   "auth.signin": "Вход",
   "auth.signup": "Регистрация",
@@ -40,6 +42,9 @@
   "auth.welcome": "Добро пожаловать, ",
   "main.slogan": "Создайте свой собственный турнир!",
   "main.associations": "Мои ассоциации",
+  "ncy.homepage": "Главная",
+  "ncy.asscns": "Ассоциации",
+  "ncy.profile": "Профиль",
   "as.name": "Имя ассоциации",
   "as.name.invalid": "Это поле не должно быть пустым.",
   "as.desc": "Описание ассоциации",
@@ -49,7 +54,11 @@
   "as.edit": "Изменить",
   "as.delete": "Удалить",
   "as.cancel": "Отмена",
+  "as.leaguesCount": "Лиги:",
   "as.confirmDeleteHeader": "Удалить ассоциацию",
   "as.confirmDeleteText": "Вы собираетесь удалить ассоциацию: ",
-  "as.confirmDeleteText2": "Отменить данное действие будет невозможно.\nВы уверены?"
+  "as.confirmDeleteText2": "Отменить данное действие будет невозможно.\nВы уверены?",
+  "lg.name": "Имя",
+  "lg.created": "Создана",
+  "lg.desc": "Описание"
 }

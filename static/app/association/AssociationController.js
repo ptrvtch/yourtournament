@@ -6,16 +6,15 @@
         .controller('AssociationController', AssociationController)
         .controller('AssociationModalController', AssociationModalController);
 
-    AssociationController.$inject = ['ApiFactory', '$uibModal'];
+    AssociationController.$inject = ['ApiFactory', '$uibModal', '$localStorage'];
     AssociationModalController.$inject = ['$uibModalInstance', 'toDelete', 'ApiFactory'];
 
-    function AssociationController(ApiFactory, $uibModal, $uibModalInstance) {
+    function AssociationController(ApiFactory, $uibModal, $localStorage) {
         var vm = this;
         vm.createAssociation = createAssociation;
         vm.addNewAssociation = addNewAssociation;
         vm.cancel = cancel;
         vm.cancelEdit = cancelEdit;
-        vm.cancelDelete = cancelDelete;
         vm.deleteAssociation = deleteAssociation;
         vm.editAssociation = editAssociation;
         vm.confirmEditAssociation = confirmEditAssociation;
@@ -57,10 +56,6 @@
             vm.isEditing = false;
         }
 
-        function cancelDelete() {
-            $uibModalInstance.dismiss('cancel');
-        }
-
         function createAssociation() {
             ApiFactory.associations.create(vm.newAssociation).then(function(response) {
                 vm.associations.push({
@@ -95,6 +90,7 @@
         function getMyAssociations() {
             ApiFactory.associations.get().then(function(response) {
                 vm.associations = response.data;
+                $localStorage.associations = response.data;
                 vm.associationsLoaded = true;
             })
         }

@@ -54,22 +54,39 @@
                 url: '/',
                 templateUrl: '/static/app/index.html',
                 ncyBreadcrumb: {
-                    label: 'Homepage'
+                    label: "{$ 'ncy.homepage' | translate $}"
                 }
             })
             .state('main.asscns', {
+                abstract: true,
                 url: '/associations',
+                template: '<ui-view/>',
+                ncyBreadcrumb: {
+                    skip: true
+                }
+            })
+            .state('main.asscns.list', {
+                url: '/all',
                 templateUrl: '/static/app/association/index.html',
                 controller: 'AssociationController as vm',
                 ncyBreadcrumb: {
-                    label: 'Associations',
+                    label: "{$ 'ncy.asscns' | translate $}",
                     parent: 'main.index'
+                }
+            })
+            .state('main.asscns.detail', {
+                url: '/:id',
+                templateUrl: '/static/app/association/detail.html',
+                controller: 'AssociationDetailController as vm',
+                ncyBreadcrumb: {
+                    label: "{$ vm.association.name $}",
+                    parent: 'main.asscns.list'
                 }
             })
             .state('main.profile', {
                 url: '/profile',
                 ncyBreadcrumb: {
-                    label: 'Profile',
+                    label: "{$ 'ncy.profile' | translate $}",
                     parent :'main.index'
                 },
                 templateUrl: '/static/app/auth/profile.html'

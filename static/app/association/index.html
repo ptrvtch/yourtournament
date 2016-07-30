@@ -1,20 +1,23 @@
 <div class="container-fluid">
     <div class="row" ng-show="vm.associationsLoaded">
         <div class="col col-xs-6 col-sm-4 col-md-3" ng-repeat="association in vm.associations">
-            <div class="association">
+            <div class="association" ui-sref="main.asscns.detail({'id': association.id})">
                 <div class="association-info" ng-hide="vm.isEditing && (vm.editedAssociation.id == association.id)">
                     <div class="control">
                     <span class="text-muted" title="{$ association.created |date:'medium' $}"><small>{$ association.created | relativeDate $}</small></span>
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"
                           title="{$ 'as.edit' | translate $}"
-                          ng-click="vm.editAssociation(association)"></span>
+                          ng-click="vm.editAssociation(association); $event.stopPropagation();"></span>
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"
                           title="{$ 'as.delete' | translate $}"
-                          ng-click="vm.deleteAssociation(association)"></span>
+                          ng-click="vm.deleteAssociation(association); $event.stopPropagation();"></span>
                     </div>
                     <h4>{$ association.name $}</h4>
                     <p>
                         {$ association.description $}
+                    </p>
+                    <p>
+                        {$ 'as.leaguesCount' | translate $} {$ association.leagues.length $}
                     </p>
                 </div>
                 <form name="editForm"
@@ -53,7 +56,7 @@
                                 ng-disabled="editForm.$invalid">{$ 'as.edit' | translate $}</button>
                         <button class="btn btn-default btn-lg"
                                 id="cancelButton"
-                                ng-click="vm.cancelEdit()">{$ 'as.cancel' | translate $}</button>
+                                ng-click="vm.cancelEdit(); $event.stopPropagation();">{$ 'as.cancel' | translate $}</button>
                     </div>
                 </form>
             </div>

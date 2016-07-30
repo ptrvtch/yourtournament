@@ -28,6 +28,8 @@
   "a_year_from_now"     : "a year from now",
   "years_from_now"      : "{$time$} years from now",
   "over_a_year_from_now": "over a year from now",
+  "asscn": "Association",
+  "league": "League",
   "auth": "Authenticate",
   "auth.signin": "Sign in",
   "auth.signup": "Sign up",
@@ -40,6 +42,9 @@
   "auth.welcome": "Welcome ",
   "main.slogan": "Make the tournament with your own rules!",
   "main.associations": "My associations",
+  "ncy.homepage": "Homepage",
+  "ncy.asscns": "Associations",
+  "ncy.profile": "Profile",
   "as.name": "Association name",
   "as.name.invalid": "This field should not be empty",
   "as.desc": "Association description",
@@ -49,7 +54,11 @@
   "as.edit": "Edit",
   "as.delete": "Delete",
   "as.cancel": "Cancel",
+  "as.leaguesCount": "Leagues",
   "as.confirmDeleteHeader": "Delete Association",
   "as.confirmDeleteText": "You are going to delete this association: ",
-  "as.confirmDeleteText2": "Once you do it, you cannot return it back.\nAre you sure?"
+  "as.confirmDeleteText2": "Once you do it, you cannot return it back.\nAre you sure?",
+  "lg.name": "Name",
+  "lg.created": "Created",
+  "lg.desc": "Description"
 }

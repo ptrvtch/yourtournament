@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col col-md-9">
+                <div class="container" ng-cloak>
+                    <h2><small>{$ "asscn" | translate $} {$ vm.association.name $}</small></h2>
+                    <table class="table table-stripped table-condensed">
+                        <tr>
+                            <th>{$ "lg.name" | translate $}</th>
+                            <th>{$ "lg.created" | translate $}</th>
+                            <th>{$ "lg.description" | translate $}</th>
+                        </tr>
+                        <tr ng-repeat="league in vm.association.leagues">
+                            <td>{$ league.name $}</td>
+                            <td>{$ league.created |date:'medium' $}</td>
+                            <td>{$ league.description $}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col col-md-3 hidden-sm hidden-xs yt-sidebar">
+                <ul class="list-unstyled">
+                    <li ng-repeat="asscn in vm.all"><a ui-sref="main.asscns.detail({'id': asscn.id})"
+                                                       class="btn btn-block {$ (asscn.id == vm.association.id)? 'btn-primary' : 'btn-default' $}">{$ asscn.name $}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
