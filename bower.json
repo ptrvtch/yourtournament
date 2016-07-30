@@ -34,7 +34,8 @@
     "angular-breadcrumb": "^0.4.1",
     "angular-relative-date": "^2.1.0",
     "angular-dynamic-locale": "^0.1.32",
-    "angular-i18n": "^1.5.8"
+    "angular-i18n": "^1.5.8",
+    "angular-translate-handler-log": "^2.11.1"
   },
   "resolutions": {
     "angular": "1.5.7"
