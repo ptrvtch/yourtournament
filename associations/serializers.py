@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from associations.models import Association
+from leagues.serializers import LeagueSerializer
 
 
 class AssociationSerializer(serializers.ModelSerializer):
@@ -8,10 +9,7 @@ class AssociationSerializer(serializers.ModelSerializer):
         many=False,
         read_only=True,
     )
-    leagues = serializers.PrimaryKeyRelatedField(
-        many=True,
-        read_only=True
-    )
+    leagues = LeagueSerializer(many=True, required=False, read_only=True)
 
     class Meta:
         model = Association
