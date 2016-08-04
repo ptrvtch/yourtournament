@@ -1,131 +1,167 @@
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="page-header">
-            <h2>{$ 'auth' | translate $}</h2>
-        </div>
-        <uib-tabset active="vm.active" justified=true id="authModal">
-            <uib-tab index="0" heading="{$ 'auth.signup' | translate $}">
-                <div class="well">
-                    <form role="form" name="signupForm" ng-submit="vm.signup()">
-                        <div class="form-group">
-                            <label for="register__email">{$ 'auth.email' | translate $}</label>
-                            <input type="email"
-                                   name="email"
-                                   class="form-control"
-                                   id="register__email"
-                                   ng-model="vm.email"
-                                   placeholder=""
-                                   required="required"
-                            />
-                            <p class="text-danger" ng-show="vm.errors['email']">
-                                {$ vm.errors['email'].toString() $}
-                            </p>
-                        </div>
+<md-dialog aria-label="{$ 'auth.signup' | translate $}"
+           flex="60"
+           flex-sm="100"
+           class="authDialog">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{$ 'auth.signup' | translate $}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel()">
+                    <md-icon class="material-icons" aria-label="Close dialog">clear</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="vm.currentTab">
+                <md-tab label="{$ 'auth.signup' | translate $}" >
+                    <md-content layout-padding>
+                        <form role="form" name="signupForm" ng-submit="vm.login()">
 
-                        <div class="form-group">
-                            <label for="register__username">{$ 'auth.username' | translate $}</label>
-                            <input type="text"
-                                   name="username"
-                                   class="form-control"
-                                   id="register__username"
-                                   ng-model="vm.username"
-                                   placeholder=""
-                                   required="required"
-                            />
-                            <p class="text-danger" ng-show="vm.errors['username']">
-                                {$ vm.errors['username'].toString() $}
-                            </p>
-                        </div>
+                            <md-input-container class="md-block">
+                                <label for="email">
+                                    {$ 'auth.email' | translate $}
+                                </label>
+                                <input required
+                                       name="email"
+                                       id="email"
+                                       ng-model="vm.email"
+                                       type="email" >
+                                <div ng-messages="vm.errors['email']">
+                                    <div ng-message="required">
+                                        {$ vm.errors['email'].toString() $}
+                                    </div>
+                                </div>
+                            </md-input-container>
 
-                        <div class="form-group">
-                            <label for="register__password">{$ 'auth.password' | translate $}</label>
-                            <input type="password"
-                                   name="password1"
-                                   class="form-control"
-                                   id="register__password"
-                                   ng-model="vm.password1"
-                                   placeholder=""
-                                   required="required"
-                            />
-                            <p class="text-danger" ng-show="vm.errors['password1']">
-                                {$ vm.errors['password1'].toString() $}
-                            </p>
-                        </div>
+                            <md-input-container class="md-block">
+                                <label for="username">
+                                    {$ 'auth.username' | translate $}
+                                </label>
+                                <input required
+                                       name="username"
+                                       id="username"
+                                       ng-model="vm.username"
+                                       type="text">
+                                <div ng-message="vm.errors['username']">
+                                    <div ng-message="required">
+                                        {$ vm.errors['username'].toString() $}
+                                    </div>
+                                </div>
+                            </md-input-container>
 
-                        <div class="form-group">
-                            <label for="register__password">{$ 'auth.password2' | translate $}</label>
-                            <input type="password"
-                                   name="password2"
-                                   class="form-control"
-                                   id="register__password"
-                                   ng-model="vm.password2"
-                                   placeholder=""
-                                   required="required"
-                            />
-                            <p class="text-danger" ng-show="vm.errors['password1']">
-                                {$ vm.errors['password1'].toString() $}
-                            </p>
-                        </div>
-                        <div class="form-group button-group">
-                            <button type='submit'
-                                    class="btn btn-primary"
-                                    ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
-                                    ng-click="vm.signup()">
-                                {$ 'auth.signup' | translate $}
-                            </button>
-                            <button type="button"
-                                    class="btn btn-primary"
-                                    ng-click="vm.cancel()">
-                                {$ 'auth.cancel' | translate $}
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </uib-tab>
-            <uib-tab index="1" heading="{$ 'auth.signin' | translate $}">
-                <div class="well">
-                    <form role="form" name="signinForm" ng-submit="vm.login()">
-                        <div class="form-group">
-                            <label for="register__username">{$ 'auth.username' | translate $}</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="register__username"
-                                   ng-model="vm.username"
-                                   placeholder=""
-                                   required="required"
-                            />
-                        </div>
+                            <md-input-container class="md-block">
+                                <label for="password1">
+                                    {$ 'auth.password' | translate $}
+                                </label>
+                                <input required
+                                       name="password1"
+                                       id="password1"
+                                       ng-model="vm.password1"
+                                       type="password">
+                                <div ng-message="vm.errors['password1']">
+                                    <div ng-message="required">
+                                        {$ vm.errors['password1'].toString() $}
+                                    </div>
+                                </div>
+                            </md-input-container>
 
-                        <div class="form-group">
-                            <label for="register__password">{$ 'auth.password' | translate $}</label>
-                            <input type="password"
-                                   class="form-control"
-                                   id="register__password"
-                                   ng-model="vm.password"
-                                   placeholder="" required="required"
-                            />
-                        </div>
-                        <div class="form-group" ng-show="vm.non_field_errors">
-                            <p class="text-danger">
-                                {$ vm.non_field_errors $}
-                            </p>
-                        </div>
-                        <div class="form-group button-group">
-                            <button type='submit'
-                                    class="btn btn-primary"
-                                    ng-disabled="signinForm.$invalid"
-                                    ng-click="vm.login()">
-                                {$ 'auth.signin' | translate $}
-                            </button>
-                            <button type="button"
-                                    class="btn btn-primary"
-                                    ng-click="vm.cancel()">
-                                {$ 'auth.cancel' | translate $}
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </uib-tab>
-        </uib-tabset>
-    </div>
-</div>
+                            <md-input-container class="md-block">
+                                <label for="password2">
+                                    {$ 'auth.password2' | translate $}
+                                </label>
+                                <input required
+                                       name="password2"
+                                       id="password2"
+                                       ng-model="vm.password2"
+                                       type="password">
+                                <div ng-message="vm.errors['password2']">
+                                    <div ng-message="required">
+                                        {$ vm.errors['password2'].toString() $}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+
+                                <span flex></span>
+                                <md-button ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
+                                           ng-click="vm.cancel()">
+                                    {$ 'auth.cancel' | translate $}
+                                </md-button>
+                                <md-button ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
+                                           ng-click="vm.signup()">
+                                    {$ 'auth.signup' | translate $}
+                                </md-button>
+
+                            </md-input-container>
+
+                        </form>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{$ 'auth.signin' | translate $}">
+                    <md-content layout-padding>
+                        <form role="form" name="signupForm" ng-submit="vm.login()">
+
+                            <md-input-container class="md-block">
+                                <label for="username">
+                                    {$ 'auth.username' | translate $}
+                                </label>
+                                <input required
+                                       name="username"
+                                       id="username"
+                                       ng-model="vm.username"
+                                       type="text">
+                                <div ng-message="vm.errors['username']">
+                                    <div ng-message="required">
+                                        {$ vm.errors['username'].toString() $}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label for="password">
+                                    {$ 'auth.password' | translate $}
+                                </label>
+                                <input required
+                                       name="password"
+                                       id="password"
+                                       ng-model="vm.password"
+                                       type="password">
+                                <div ng-message="vm.non_field_errors">
+                                    <div ng-message="required">
+                                        {$ vm.non_field_errors $}
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+
+                                <span flex></span>
+                                <md-button ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
+                                           ng-click="vm.cancel()">
+                                    {$ 'auth.cancel' | translate $}
+                                </md-button>
+                                <md-button ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
+                                           ng-click="vm.login()">
+                                    {$ 'auth.signin' | translate $}
+                                </md-button>
+
+                            </md-input-container>
+
+                        </form>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+    <!--
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.cancel('not useful')" >
+                Not Useful
+            </md-button>
+            <md-button ng-click="vm.register('useful')">
+                Useful
+            </md-button>
+        </md-dialog-actions>
+        -->
+</md-dialog>

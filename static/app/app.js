@@ -11,7 +11,8 @@
             'pascalprecht.translate',
             'ncy-angular-breadcrumb',
             'relativeDate',
-            'tmh.dynamicLocale'
+            'tmh.dynamicLocale',
+            'ngMaterial'
         ])
         .config(config)
         .run(run);
@@ -24,7 +25,8 @@
         '$httpProvider',
         'cfpLoadingBarProvider',
         '$translateProvider',
-        'tmhDynamicLocaleProvider'
+        'tmhDynamicLocaleProvider',
+        '$breadcrumbProvider'
     ];
 
     function config($interpolateProvider,
@@ -34,7 +36,8 @@
                     $httpProvider,
                     cfpLoadingBarProvider,
                     $translateProvider,
-                    tmhDynamicLocaleProvider
+                    tmhDynamicLocaleProvider,
+                    $breadcrumbProvider
     ) {
         $interpolateProvider.startSymbol('{$');
         $interpolateProvider.endSymbol('$}');
@@ -129,6 +132,10 @@
         $translateProvider.useMissingTranslationHandlerLog();
 
         tmhDynamicLocaleProvider.localeLocationPattern('/static/bower/angular-i18n/angular-locale_{$locale$}.js');
+
+        $breadcrumbProvider.setOptions({
+            templateUrl: '/static/app/breadcrumbs.html'
+        });
     }
     
     run.$inject = ['$http'];

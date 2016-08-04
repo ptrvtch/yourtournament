@@ -1,3 +1,4 @@
+<!--
 <div class="container-fluid">
     <div class="row" ng-show="vm.associationsLoaded">
         <div class="col col-xs-6 col-sm-4 col-md-3" ng-repeat="association in vm.associations">
@@ -108,3 +109,25 @@
         </div>
     </div>
 </div>
+-->
+<md-content flex layout-padding>
+    <md-grid-list md-row-height="4:2" md-cols="4" md-cols-md="2" md-cols-sm="2" md-cols-xs="1">
+        <md-grid-tile md-colspan="1" md-rowspan="1"
+                     ng-repeat="association in vm.associations">
+            <md-card flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{$ association.name $}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <p>
+                        {$ association.description $}
+                    </p>
+                </md-card-content>
+            </md-card>
+        </md-grid-tile>
+    </md-grid-list>
+
+
+</md-content>

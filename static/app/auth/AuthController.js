@@ -5,9 +5,9 @@
         .module('yt')
         .controller('AuthController', AuthController);
 
-    AuthController.$inject = ['$uibModalInstance', '$state', 'AuthFactory', '$localStorage', 'active'];
+    AuthController.$inject = ['$mdDialog', '$state', 'AuthFactory', '$localStorage', 'active'];
 
-    function AuthController($uibModalInstance, $state, AuthFactory, $localStorage, active) {
+    function AuthController($mdDialog, $state, AuthFactory, $localStorage, active) {
         var vm = this;
         
         vm.signup = signup;
@@ -37,7 +37,7 @@
         }
 
         function cancel() {
-            $uibModalInstance.dismiss('cancel');
+            $mdDialog.cancel('cancel');
         }
         
         function processErrors(errorsData) {
@@ -54,8 +54,8 @@
             $localStorage.token = data.key;
             AuthFactory.getCurrentUser().then(function(res){
                 $localStorage.user = res.data;
-                $uibModalInstance.close($localStorage.user);
                 $state.go('main.asscns.list');
+                $mdDialog.hide($localStorage.user);
             })
         }
 

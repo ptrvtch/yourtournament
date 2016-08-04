@@ -5,14 +5,15 @@
         .module('yt')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$state', '$uibModal', 'AuthFactory', '$localStorage', '$translate', 'tmhDynamicLocale'];
+    MainController.$inject = ['$state', '$mdDialog', 'AuthFactory', '$localStorage', '$translate', 'tmhDynamicLocale', '$scope'];
 
-    function MainController($state, $uibModal, AuthFactory, $localStorage, $translate, tmhDynamicLocale) {
+    function MainController($state, $mdDialog, AuthFactory, $localStorage, $translate, tmhDynamicLocale, $scope) {
         var vm = this;
         vm.languages = [
             {val: 'en', name: 'English'},
             {val: 'ru', name: 'Русский'}
         ];
+
 
         vm.openSignIn = function() {
             openModal(1);
@@ -25,28 +26,27 @@
 
         function openModal(state) {
             
-            var modalInstance = $uibModal.open({
-                animation: true,
+            $mdDialog.show({
                 templateUrl: '/static/app/auth/register.html',
-                controller: 'AuthController',
-                controllerAs: 'vm',
-                size: 'lg',
-                resolve: {
+                controller: 'AuthController as vm',
+                clickOutsideToClose: true,
+                escapeToClose: true,
+                locals: {
                     active: state
                 }
             });
-
-            modalInstance.result.then(function(data){
-                vm.activate();
-            })
         }
 
         vm.logout = function() {
             AuthFactory.logout().then(function() {
-                vm.user = null;
                 $localStorage.user = null;
+                $localStorage.token = null;
                 $state.go('main.index');
             })
+        };
+
+        vm.isAuthenticated = function() {
+            return !!$localStorage.user;
         };
 
         vm.setLanguage = function() {

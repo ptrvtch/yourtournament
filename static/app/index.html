@@ -1,14 +1,14 @@
-<div class="container-fluid">
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Your Tournament!</h1>
-            <p>
-                {$ 'main.slogan' | translate $}
-            </p>
-            <p>
-                <a class="btn btn-primary btn-lg" role="button" ng-if="!vm.user" ng-click="vm.openSignUp()">{$ 'auth.signup' | translate $}</a>
-                <a class="btn btn-primary btn-lg" role="button" ng-if="vm.user" ui-sref="main.asscns.list">{$ 'main.associations' | translate $}</a>
-            </p>
-        </div>
-    </div>
-</div>
+<md-content flex layout-padding>
+    <h2>Your Tournament!</h2>
+    <p>
+        {$ 'main.slogan' | translate $}
+    </p>
+    <md-button ng-click="vm.openSignUp()"
+               ng-if="!vm.isAuthenticated()">
+        {$ 'auth.signup' | translate $}
+    </md-button>
+    <md-button ui-sref="main.asscns.list"
+               ng-if="vm.isAuthenticated()">
+        {$ 'main.associations' | translate $}
+    </md-button>
+</md-content>
