@@ -12,7 +12,8 @@
             'ncy-angular-breadcrumb',
             'relativeDate',
             'tmh.dynamicLocale',
-            'ngMaterial'
+            'ngMaterial',
+            'xeditable'
         ])
         .config(config)
         .run(run);
@@ -138,10 +139,12 @@
         });
     }
     
-    run.$inject = ['$http'];
+    run.$inject = ['$http', 'editableOptions', 'editableThemes'];
 
-    function run($http) {
+    function run($http, editableOptions, editableThemes) {
         $http.defaults.xsrfHeaderName = 'X-CSRFToken';
         $http.defaults.xsrfCookieName = 'csrftoken';
+
+        editableOptions.theme = 'default';
     }
 })();
