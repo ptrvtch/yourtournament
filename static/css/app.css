@@ -1,24 +1,10 @@
 md-card-title .editable-input {
-    -webkit-order: 2;
-    -ms-flex-order: 2;
-    order: 2;
     display: block;
-    margin-top: 0;
-    background: 0 0;
-    padding: 2px 0px 1px;
     border-width: 0 0 1px;
-    height: 34px;
-    -ms-flex-preferred-size: 26px;
-    border-radius: 0;
+    height: 30px;
     border-style: solid;
     width: 100%;
-    box-sizing: border-box;
-    float: left;
     font-size: 24px;
-    font-weight: 400;
-    line-height: 32px;
-    text-decoration: none;
-    color: #428bca;
 }
 
 .editable-input:focus {
@@ -27,4 +13,22 @@ md-card-title .editable-input {
 
 md-card.association {
     height: 300px;
+}
+
+.editable-textarea {
+    width: 100%;
+}
+
+.association md-card-content p, .association textarea {
+    height: 4em;
+}
+
+.association textarea {
+    resize: none;
+    border: none;
+    padding: 0;
+    display: inline-block;
+    margin: 0px 0px 0px 0px;
+    width: 100%;
+    border-bottom: solid 1px #428bca;
 }
