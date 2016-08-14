@@ -6,10 +6,10 @@
         .controller('AssociationController', AssociationController)
         .controller('AssociationModalController', AssociationModalController);
 
-    AssociationController.$inject = ['ApiFactory', '$uibModal', '$localStorage'];
+    AssociationController.$inject = ['ApiFactory', '$uibModal', '$localStorage', '$mdToast'];
     AssociationModalController.$inject = ['$uibModalInstance', 'toDelete', 'ApiFactory'];
 
-    function AssociationController(ApiFactory, $uibModal, $localStorage) {
+    function AssociationController(ApiFactory, $uibModal, $localStorage, $mdToast) {
         var vm = this;
         vm.createAssociation = createAssociation;
         vm.addNewAssociation = addNewAssociation;
@@ -17,7 +17,6 @@
         vm.cancelEdit = cancelEdit;
         vm.deleteAssociation = deleteAssociation;
         vm.editAssociation = editAssociation;
-        vm.confirmEditAssociation = confirmEditAssociation;
 
         function addNewAssociation() {
             vm.newAssociation = {};
@@ -26,23 +25,12 @@
         }
 
         function editAssociation(association) {
-            vm.isCreating = false;
-            vm.editedAssociation = {
-                name: association['name'],
-                description: association['description'],
-                id: association['id']
-            };
-            vm.isEditing = true;
-        }
-
-        function confirmEditAssociation() {
             var data = {
-                name: vm.editedAssociation.name,
-                description: vm.editedAssociation.description
+                name: association.name,
+                description: association.description
             };
-            ApiFactory.associations.edit(vm.editedAssociation.id, data).then(function(response) {
-                vm.isEditing = false;
-                getMyAssociations();
+            ApiFactory.associations.edit(association.id, data).then(function(response) {
+                $mdToast.showSimple('Association changed!');
             }, function(errors) {
                 console.log(errors.data);
             })
@@ -91,8 +79,24 @@
             ApiFactory.associations.get().then(function(response) {
                 vm.associations = response.data;
                 $localStorage.associations = response.data;
+                setTooltip(vm.associations);
                 vm.associationsLoaded = true;
             })
+        }
+
+        function setTooltip(associations) {
+            for (var i = 0; i < associations.length; i++) {
+                var association = associations[i];
+                association.leaguesNames = '';
+                for (var j = 0; j < association.leagues.length; j++) {
+                    if (j >= 3) {
+                        var more = association.leagues.length - 3;
+                        association.leaguesNames += (' and ' + more + ' more')
+                        break;
+                    }
+                    association.leaguesNames += (association.leagues[j].name + ', ');
+                }
+            }
         }
         
         function activate() {
