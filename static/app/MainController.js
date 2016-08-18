@@ -49,13 +49,13 @@
             return !!$localStorage.user;
         };
 
-        vm.setLanguage = function() {
-            $translate.use(vm.currentLanguage);
-            tmhDynamicLocale.set(vm.currentLanguage);
+        vm.setLanguage = function(lang) {
+            $translate.use(lang);
+            tmhDynamicLocale.set(lang);
         };
 
         vm.activate = function() {
-            vm.currentLanguage = 'ru';
+            $translate.use('ru');
             tmhDynamicLocale.set('ru');
             vm.user = $localStorage.user;
             $state.go('main.index');
