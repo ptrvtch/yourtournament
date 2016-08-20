@@ -41,9 +41,13 @@ md-tooltip .md-content {
     height: auto;
 }
 
-.new span {
+.new span.add {
     font-size: 17em;
     color: #f3f3f3;
     text-align: center;
     cursor: pointer;
+}
+
+.new textarea {
+    margin-top: 10px;
 }

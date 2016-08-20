@@ -6,10 +6,10 @@
         .controller('AssociationController', AssociationController)
         .controller('AssociationModalController', AssociationModalController);
 
-    AssociationController.$inject = ['ApiFactory', '$uibModal', '$localStorage', '$mdToast'];
-    AssociationModalController.$inject = ['$uibModalInstance', 'toDelete', 'ApiFactory'];
+    AssociationController.$inject = ['ApiFactory', '$mdDialog', '$localStorage', '$mdToast'];
+    AssociationModalController.$inject = ['$mdDialog', 'toDelete', 'ApiFactory'];
 
-    function AssociationController(ApiFactory, $uibModal, $localStorage, $mdToast) {
+    function AssociationController(ApiFactory, $mdDialog, $localStorage, $mdToast) {
         var vm = this;
         vm.createAssociation = createAssociation;
         vm.addNewAssociation = addNewAssociation;
@@ -17,11 +17,10 @@
         vm.cancelEdit = cancelEdit;
         vm.deleteAssociation = deleteAssociation;
         vm.editAssociation = editAssociation;
+        vm.storeAsscn = storeAsscn;
 
         function addNewAssociation() {
-            vm.newAssociation = {};
-            vm.isEditing = false;
-            vm.isCreating = true;
+            vm.isAdding = true;
         }
 
         function editAssociation(association) {
@@ -29,15 +28,22 @@
                 name: association.name,
                 description: association.description
             };
+            if ((data.name == vm.editedAssociation.name) && (data.description == vm.editedAssociation.description)) {
+                return;
+            }
             ApiFactory.associations.edit(association.id, data).then(function(response) {
                 $mdToast.showSimple('Association changed!');
             }, function(errors) {
-                console.log(errors.data);
+                console.error(errors.data);
             })
+        }
+
+        function storeAsscn(asscn) {
+            vm.editedAssociation = angular.copy(asscn);
         }
         
         function cancel () {
-            vm.isCreating = false;
+            vm.isAdding = false;
         }
         
         function cancelEdit() {
@@ -45,6 +51,7 @@
         }
 
         function createAssociation() {
+            if (!vm.newAssociation.name || !vm.newAssociation.description) return;
             ApiFactory.associations.create(vm.newAssociation).then(function(response) {
                 vm.associations.push({
                     "id": response.data['id'],
@@ -52,27 +59,28 @@
                     "created": response.data['created'],
                     "description": response.data['description']
                 });
-                vm.isCreating = false;
+                vm.isAdding = false;
+                vm.newAssociation = {};
             }, function(errors) {
-                console.log(errors.data);
+                console.error(errors.data);
             })
         }
-        
+
+
         function deleteAssociation(association) {
             vm.associationToDelete = association;
-            var modalInstance = $uibModal.open({
-                animation: true,
+            $mdDialog.show({
                 templateUrl: '/static/app/association/delete.html',
                 controller: 'AssociationModalController as vm',
-                size: 'md',
-                resolve: {
+                clickOutsideToClose: true,
+                escapeToClose: true,
+                locals: {
                     toDelete: association
                 }
-            });
-
-            modalInstance.result.then(function(response) {
+            }).then(function(){
                 getMyAssociations();
-            })
+                $mdToast.showSimple('Association deleted!');
+            });
         }
 
         function getMyAssociations() {
@@ -101,28 +109,29 @@
         
         function activate() {
             vm.associationsLoaded = false;
+            vm.isAdding = false;
+            vm.newAssociation = {};
             getMyAssociations()
         }
 
         activate();
     }
 
-    function AssociationModalController($uibModalInstance, toDelete, ApiFactory) {
+    function AssociationModalController($mdDialog, toDelete, ApiFactory) {
         var vm = this;
         vm.confirmDelete = confirmDelete;
         vm.cancelDelete = cancelDelete;
 
         function confirmDelete() {
             ApiFactory.associations.delete(vm.associationToDelete.id).then(function(response) {
-                console.log(response.data);
-                $uibModalInstance.close(response.data);
+                $mdDialog.hide(response.data);
             }, function(errors) {
-                console.log(errors.data);
+                console.error(errors.data);
             })
         }
 
         function cancelDelete() {
-            $uibModalInstance.dismiss('cancel');
+            $mdDialog.cancel('cancel');
         }
 
         function activate() {

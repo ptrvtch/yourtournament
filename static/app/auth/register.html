@@ -1,6 +1,6 @@
 <md-dialog aria-label="{$ 'auth.signup' | translate $}"
            flex="60"
-           flex-sm="100"
+           flex-xs="100"
            class="authDialog">
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -89,6 +89,7 @@
                                     {$ 'auth.cancel' | translate $}
                                 </md-button>
                                 <md-button ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
+                                           type="submit"
                                            ng-click="vm.signup()">
                                     {$ 'auth.signup' | translate $}
                                 </md-button>
@@ -142,6 +143,7 @@
                                     {$ 'auth.cancel' | translate $}
                                 </md-button>
                                 <md-button ng-disabled="signupForm.$invalid || (signupForm.password1.$modelValue != signupForm.password2.$modelValue)"
+                                           type="submit"
                                            ng-click="vm.login()">
                                     {$ 'auth.signin' | translate $}
                                 </md-button>
