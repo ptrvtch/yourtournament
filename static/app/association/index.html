@@ -4,17 +4,25 @@
                      ng-repeat="association in vm.associations">
             <md-card flex class="association">
                 <md-card-title>
-                    <md-card-title-text>
+                    <md-card-title-text layout="row" layout-align="space-between">
                         <span editable-text="association.name"
                               buttons="no"
                               blur="submit"
+                              e-form="editNameForm"
                               onshow="vm.storeAsscn(association)"
                               onaftersave="vm.editAssociation(association)"
-                              class="md-headline">{$ association.name $}
+                              class="md-headline">
+                                {$ association.name $}
+                        </span>
+                        <md-button class="md-icon-button"
+                                   aria-label="Edit"
+                                   ng-hide="editNameForm.$visible"
+                                   ng-click="editNameForm.$show()" >
                             <md-tooltip md-direction="bottom" md-delay="1500">
                                 {$ "as.clickEdit" | translate $}
                             </md-tooltip>
-                        </span>
+                            <span class="material-icons">mode_edit</span>
+                        </md-button>
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
@@ -27,12 +35,10 @@
                     <p editable-textarea="association.description"
                        buttons="no"
                        blur="submit"
+                       e-form="editDescriptionForm"
                        onshow="vm.storeAsscn(association)"
                        onaftersave="vm.editAssociation(association)">
-                        <md-tooltip md-direction="bottom" md-delay="1500">
-                            {$ "as.clickEdit" | translate $}
-                        </md-tooltip>
-                        {$ association.description $}
+                            {$ association.description $}
                     </p>
                 </md-card-content>
                 <md-card-actions layout="row" layout-align="end center">
@@ -42,6 +48,24 @@
                         </md-tooltip>
                         {$ association.created | relativeDate $}
                     </span>
+                    <md-button class="md-icon-button"
+                               aria-label="Edit"
+                               ng-hide="editDescriptionForm.$visible"
+                               ng-click="editDescriptionForm.$show()" >
+                        <md-tooltip md-direction="bottom" md-delay="1500">
+                            {$ "as.clickEdit" | translate $}
+                        </md-tooltip>
+                        <span class="material-icons">mode_edit</span>
+                    </md-button>
+                    <md-button class="md-icon-button"
+                               aria-label="Cancel"
+                               ng-show="editDescriptionForm.$visible"
+                               ng-click="editDescriptionForm.$cancel()" >
+                        <md-tooltip md-direction="bottom" md-delay="1500">
+                            {$ "as.cancel" | translate $}
+                        </md-tooltip>
+                        <span class="material-icons">cancel</span>
+                    </md-button>
                     <md-button class="md-icon-button" aria-label="Delete" ng-click="vm.deleteAssociation(association)">
                         <md-tooltip md-direction="top" md-delay="500">
                             {$ "as.delete" | translate $}
