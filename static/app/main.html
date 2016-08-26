@@ -12,7 +12,7 @@
                            aria-label="profile"
                            title="{$ vm.user.username $}"
                            class="md-icon-button">
-                    <span class="material-icons">account_circle</span>
+                    <span class="material-icons">account_box</span>
                 </md-button>
                 <md-button ng-hide="vm.isAuthenticated()"
                            ng-click="vm.openSignUp()"
@@ -26,8 +26,10 @@
                 </md-button>
                 <md-button ng-show="vm.isAuthenticated()"
                            ng-click="vm.logout()"
+                           title="{$ 'auth.logout' | translate $}"
+                           class="md-icon-button"
                            aria-label="{$ 'auth.logout' | translate $}">
-                    {$ 'auth.logout' | translate $}
+                    <span class="material-icons">exit_to_app</span>
                 </md-button>
             </div>
         </md-toolbar>
@@ -37,24 +39,4 @@
     <div ncy-breadcrumb></div>
 
     <div ui-view></div>
-
-    <!--<footer class="footer">-->
-        <!--<div class="container">-->
-            <!--<div class="row">-->
-                <!--<div class="col-sm-6">-->
-                    <!--2016 Oleg Omelchenko-->
-                <!--</div>-->
-
-                <!--<div class="col-sm-6">-->
-                    <!--<form>-->
-                        <!--<select title="language" class="form-control input-sm"-->
-                                <!--ng-change="vm.setLanguage()"-->
-                                <!--ng-model="vm.currentLanguage">-->
-                            <!--<option ng-repeat="lang in vm.languages" value="{$ lang.val $}">{$ lang.name $}</option>-->
-                        <!--</select>-->
-                    <!--</form>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</footer>-->
 </div>

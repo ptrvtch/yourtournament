@@ -1,29 +1,45 @@
-<div class="container-fluid">
-    <div class="jumbotron">
-        <div class="container">
-            <div class="col col-md-9">
-                <div class="container" ng-cloak>
-                    <h2><small>{$ "asscn" | translate $} {$ vm.association.name $}</small></h2>
-                    <table class="table table-stripped table-condensed">
-                        <tr>
-                            <th>{$ "lg.name" | translate $}</th>
-                            <th>{$ "lg.created" | translate $}</th>
-                            <th>{$ "lg.desc" | translate $}</th>
-                        </tr>
-                        <tr ng-repeat="league in vm.association.leagues">
-                            <td>{$ league.name $}</td>
-                            <td>{$ league.created |date:'medium' $}</td>
-                            <td>{$ league.description $}</td>
-                        </tr>
-                    </table>
+<section layout-padding layout="column"
+         md-swipe-left="vm.toggleSideNav()"
+         md-swipe-right="vm.toggleSideNav()">
+    <md-sidenav md-component-id="sidenav">
+        <md-list>
+            <md-subheader>
+                {$ 'main.associations' | translate $}
+            </md-subheader>
+            <md-list-item ng-repeat="asscn in vm.all" class="md-list-item-hover pointer">
+                <div class="md-list-item-text">
+                    <h3 ui-sref="main.asscns.detail({'id': asscn.id})">{$ asscn.name $}</h3>
                 </div>
-            </div>
-            <div class="col col-md-3 hidden-sm hidden-xs yt-sidebar">
-                <ul class="list-unstyled">
-                    <li ng-repeat="asscn in vm.all"><a ui-sref="main.asscns.detail({'id': asscn.id})"
-                                                       class="btn btn-block {$ (asscn.id == vm.association.id)? 'btn-primary' : 'btn-default' $}">{$ asscn.name $}</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+    <md-content layout="row" layout-padding>
+        <md-grid-list md-row-height="4:3" md-gutter="10px" md-cols="4" md-cols-md="2" md-cols-sm="2" md-cols-xs="1">
+            <md-grid-tile md-colspan="1" md-rowspan="1"
+                          ng-repeat="league in vm.association.leagues">
+                <md-card flex >
+                    <md-card-header>
+                        <md-card-header-text>
+                        <span class="md-title">
+                            {$ "league" | translate $} {$ league.name $}
+                        </span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <div class="img-wrapper">
+                        <img src="/static/img/card_bgnd.png" class="md-card-image league-image">
+                    </div>
+
+                    <md-card-content>
+                        <span>
+                            {$ league.description $}
+                        </span>
+                    </md-card-content>
+                </md-card>
+            </md-grid-tile>
+        </md-grid-list>
+
+    </md-content>
+    <md-button class="md-fab md-button md-primary league-add" aria-label="Add">
+        <span class="material-icons">add</span>
+    </md-button>
+</section>

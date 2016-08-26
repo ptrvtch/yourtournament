@@ -1,3 +1,7 @@
+.pointer {
+    cursor: pointer;
+}
+
 md-card-title .editable-input {
     display: block;
     border-width: 0 0 1px;
@@ -18,6 +22,7 @@ md-card.association {
 md-card.association .md-button {
     opacity: 0;
     transition:300ms;
+    color: grey;
 }
 
 md-card.association:hover .md-button {
@@ -60,4 +65,36 @@ md-tooltip .md-content {
 
 .new textarea {
     margin-top: 10px;
+}
+
+md-grid-list {
+    width: 100%;
+}
+
+.league-image {
+    transition: 3s;
+    max-width: 100%;
+    opacity: 0.2;
+}
+
+.league-add {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.img-wrapper {
+    overflow:hidden;
+}
+
+*:hover > .league-image {
+    transform: scale(1.2);
+}
+
+.md-list-item-hover {
+    transition: 0.5s;
+}
+
+.md-list-item-hover:hover {
+    background-color: rgba(0,0,0,0.05);
 }

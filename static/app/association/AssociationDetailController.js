@@ -5,31 +5,16 @@
         .module('yt')
         .controller('AssociationDetailController', AssociationDetailController);
 
-    AssociationDetailController.$inject = ['ApiFactory', '$uibModal', '$scope', '$state', '$stateParams', '$localStorage'];
+    AssociationDetailController.$inject = ['ApiFactory', '$uibModal', '$scope', '$state', '$stateParams', '$localStorage', '$mdSidenav'];
 
-    function AssociationDetailController(ApiFactory, $uibModal, $scope, $state, $stateParams, $localStorage) {
+    function AssociationDetailController(ApiFactory, $uibModal, $scope, $state, $stateParams, $localStorage, $mdSidenav) {
         var vm = this;
-        vm.cancel = cancel;
-        vm.cancelEdit = cancelEdit;
-        vm.deleteAssociation = deleteAssociation;
-        vm.editAssociation = editAssociation;
-        vm.confirmEditAssociation = confirmEditAssociation;
-
-        function editAssociation(association) {
-
+        vm.toggleSideNav = toggleSideNav;
+        
+        function toggleSideNav() {
+            $mdSidenav('sidenav').toggle();
         }
 
-        function confirmEditAssociation() {
-
-        }
-
-        function cancel () {
-            
-        }
-
-        function cancelEdit() {
-            
-        }
 
         function deleteAssociation(association) {
             vm.associationToDelete = association;
