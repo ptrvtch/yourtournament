@@ -40,7 +40,8 @@
     "font-awesome": "fontawesome#^4.6.3",
     "angular-xeditable": "^0.2.0",
     "flag-icon-css": "^2.4.0",
-    "angular-material-data-table": "^0.10.9"
+    "angular-material-data-table": "^0.10.9",
+    "angularfire": "^2.0.2"
   },
   "resolutions": {
     "angular": "^1.5.7"

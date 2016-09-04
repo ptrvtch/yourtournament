@@ -13,7 +13,8 @@
             'relativeDate',
             'tmh.dynamicLocale',
             'ngMaterial',
-            'xeditable'
+            'xeditable',
+            'firebase'
         ])
         .config(config)
         .run(run);
