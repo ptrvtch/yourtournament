@@ -14,7 +14,7 @@
         </md-list>
     </md-sidenav>
     <md-content layout="row" layout-padding>
-        <md-grid-list md-row-height="4:3" md-gutter="10px" md-cols="4" md-cols-md="2" md-cols-sm="2" md-cols-xs="1">
+        <md-grid-list md-row-height="1:1" md-gutter="10px" md-cols="4" md-cols-md="2" md-cols-sm="2" md-cols-xs="1">
             <md-grid-tile md-colspan="1" md-rowspan="1"
                           ng-repeat="league in vm.association.leagues">
                 <md-card flex >
@@ -24,6 +24,14 @@
                             {$ "league" | translate $} {$ league.name $}
                         </span>
                         </md-card-header-text>
+                        <div flex></div>
+
+                    <md-button class="md-icon-button" aria-label="Delete" ng-click="vm.deleteLeague(league)">
+                        <md-tooltip md-direction="top" md-delay="500">
+                            {$ "lg.delete" | translate $}
+                        </md-tooltip>
+                        <span class="material-icons">delete</span>
+                    </md-button>
                     </md-card-header>
                     <div class="img-wrapper">
                         <img src="/static/img/card_bgnd.png" class="md-card-image league-image">
@@ -39,7 +47,9 @@
         </md-grid-list>
 
     </md-content>
-    <md-button class="md-fab md-button md-primary league-add" aria-label="Add">
+    <md-button class="md-fab md-button md-primary league-add"
+               ng-click="vm.addLeague($event)"
+               aria-label="Add">
         <span class="material-icons">add</span>
     </md-button>
 </section>

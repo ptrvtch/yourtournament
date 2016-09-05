@@ -3,13 +3,16 @@
 
     angular
         .module('yt')
-        .controller('AssociationDetailController', AssociationDetailController);
+        .controller('AssociationDetailController', AssociationDetailController)
+        .controller('AssociationDetailModalController', AssociationDetailModalController);
 
-    AssociationDetailController.$inject = ['ApiFactory', '$uibModal', '$scope', '$state', '$stateParams', '$localStorage', '$mdSidenav'];
+    AssociationDetailController.$inject = ['ApiFactory', '$mdDialog', '$scope', '$state', '$stateParams', '$localStorage', '$mdSidenav'];
+    AssociationDetailModalController.$inject = ['ApiFactory', '$mdDialog'];
 
-    function AssociationDetailController(ApiFactory, $uibModal, $scope, $state, $stateParams, $localStorage, $mdSidenav) {
+    function AssociationDetailController(ApiFactory, $mdDialog, $scope, $state, $stateParams, $localStorage, $mdSidenav) {
         var vm = this;
         vm.toggleSideNav = toggleSideNav;
+        vm.addLeague = addLeague;
         
         function toggleSideNav() {
             $mdSidenav('sidenav').toggle();
@@ -32,6 +35,18 @@
                 $state.go('main.asscns.list');
             })
         }
+        
+        function addLeague(ev) {
+            $mdDialog.show({
+                templateUrl: '/static/app/association/addLeague.html',
+                controller: 'AssociationDetailModalController as vm',
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                escapeToClose: true
+            }).then(function(){
+                $mdToast.showSimple('League added!');
+            });
+        }
 
         function activate() {
             vm.all = $localStorage.associations;
@@ -43,5 +58,19 @@
         }
 
         activate();
+    }
+
+    function AssociationDetailModalController(ApiFactory, $mdDialog) {
+        var vm = this;
+        vm.cancel = cancel;
+        vm.create = create;
+
+        function cancel() {
+            $mdDialog.cancel('cancel');
+        }
+
+        function create() {
+            
+        }
     }
 })();

@@ -19,7 +19,7 @@
                         <md-button class="md-icon-button"
                                    aria-label="Edit"
                                    ng-hide="editNameForm.$visible"
-                                   ng-click="editNameForm.$show()" >
+                                   ng-click="editNameForm.$show(); $event.stopPropagation()" >
                             <md-tooltip md-direction="bottom" md-delay="1500">
                                 {$ "as.clickEdit" | translate $}
                             </md-tooltip>
@@ -53,7 +53,7 @@
                     <md-button class="md-icon-button"
                                aria-label="Edit"
                                ng-hide="editDescriptionForm.$visible"
-                               ng-click="editDescriptionForm.$show()" >
+                               ng-click="editDescriptionForm.$show(); $event.stopPropagation()" >
                         <md-tooltip md-direction="bottom" md-delay="1500">
                             {$ "as.clickEdit" | translate $}
                         </md-tooltip>
@@ -62,13 +62,15 @@
                     <md-button class="md-icon-button"
                                aria-label="Cancel"
                                ng-show="editDescriptionForm.$visible"
-                               ng-click="editDescriptionForm.$cancel()" >
+                               ng-click="editDescriptionForm.$cancel(); $event.stopPropagation()" >
                         <md-tooltip md-direction="bottom" md-delay="1500">
                             {$ "as.cancel" | translate $}
                         </md-tooltip>
                         <span class="material-icons">cancel</span>
                     </md-button>
-                    <md-button class="md-icon-button" aria-label="Delete" ng-click="vm.deleteAssociation(association)">
+                    <md-button class="md-icon-button"
+                               aria-label="{$ 'as.delete' | translate $}"
+                               ng-click="vm.deleteAssociation(association); $event.stopPropagation()">
                         <md-tooltip md-direction="top" md-delay="500">
                             {$ "as.delete" | translate $}
                         </md-tooltip>

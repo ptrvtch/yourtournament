@@ -9,7 +9,7 @@ from users.serializers import UserSerializer
 class IsLeagueOwner(permissions.BasePermission):
     def has_permission(self, request, view):
         user_id = getattr(request.user, 'id')
-        asscn_id = request.data['asscn']
+        asscn_id = request.data.get('asscn')
         if asscn_id is not None:
             association = Association.objects.get(id=asscn_id)
             serialized = AssociationSerializer(association)

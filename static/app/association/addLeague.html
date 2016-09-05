@@ -1,0 +1,26 @@
+<md-dialog aria-label="{$ 'as.createLeagueHeader' | translate $}"
+           flex="80"
+           flex-sm="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{$ 'as.createLeagueHeader' | translate $}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon class="material-icons" aria-label="Close dialog">clear</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-content layout-padding>
+
+        </md-content>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="vm.cancel()" >
+            {$ 'as.cancel' | translate $}
+        </md-button>
+        <md-button ng-click="vm.createLeague()">
+            {$ 'as.delete' | translate $}
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

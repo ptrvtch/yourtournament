@@ -59,6 +59,7 @@
   "as.confirmDeleteHeader": "Удалить ассоциацию",
   "as.confirmDeleteText": "Вы собираетесь удалить ассоциацию: ",
   "as.confirmDeleteText2": "Отменить данное действие будет невозможно.\nВы уверены?",
+  "as.createLeagueHeader": "Создать лигу",
   "lg.name": "Имя",
   "lg.created": "Создана",
   "lg.desc": "Описание"

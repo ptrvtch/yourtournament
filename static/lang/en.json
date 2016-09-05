@@ -59,6 +59,7 @@
   "as.confirmDeleteHeader": "Delete Association",
   "as.confirmDeleteText": "You are going to delete this association: ",
   "as.confirmDeleteText2": "Once you do it, you cannot return it back.\nAre you sure?",
+  "as.createLeagueHeader": "Create league",
   "lg.name": "Name",
   "lg.created": "Created",
   "lg.desc": "Description"
