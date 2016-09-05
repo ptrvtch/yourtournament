@@ -1,31 +1,32 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var concatCss = require('gulp-concat-css');
 
 var paths = {
     srcLibs: [
-        'static/bower/angular/angular.js',
-        'static/bower/angular-aria/angular-aria.js',
-        'static/bower/angular-animate/angular-animate.js',
-        'static/bower/angular-material/angular-material.js',
-        'static/bower/angular-material-data-table/dist/md-data-table.js',
-        'static/bower/angular-translate/angular-translate.js',
-        'static/bower/angular-translate-loader-url/angular-translate-loader-url.js',
-        'static/bower/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
-        'static/bower/angular-translate-storage-local/angular-translate-storage-local.js',
-        'static/bower/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
-        'static/bower/angular-translate-handler-log/angular-translate-handler-log.js',
-        'static/bower/ngstorage/ngStorage.js',
-        'static/bower/angular-cookies/angular-cookies.js',
-        'static/bower/angular-ui-router/release/angular-ui-router.js',
-        'static/bower/angular-breadcrumb/dist/angular-breadcrumb.js',
-        'static/bower/ng-token-auth/dist/ng-token-auth.js',
-        'static/bower/angular-bootstrap/ui-bootstrap-tpls.js',
-        'static/bower/angular-loading-bar/build/loading-bar.js',
-        'static/bower/angular-relative-date/dist/angular-relative-date.js',
-        'static/bower/angular-dynamic-locale/dist/tmhDynamicLocale.js',
-        'static/bower/angular-xeditable/dist/js/xeditable.js',
-        'static/bower/angularfire/dist/angularfire.js'
+        'static/bower/angular/angular.min.js',
+        'static/bower/angular-aria/angular-aria.min.js',
+        'static/bower/angular-animate/angular-animate.min.js',
+        'static/bower/angular-material/angular-material.min.js',
+        'static/bower/angular-material-data-table/dist/md-data-table.min.js',
+        'static/bower/angular-translate/angular-translate.min.js',
+        'static/bower/angular-translate-loader-url/angular-translate-loader-url.min.js',
+        'static/bower/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
+        'static/bower/angular-translate-storage-local/angular-translate-storage-local.min.js',
+        'static/bower/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
+        'static/bower/angular-translate-handler-log/angular-translate-handler-log.min.js',
+        'static/bower/ngstorage/ngStorage.min.js',
+        'static/bower/angular-cookies/angular-cookies.min.js',
+        'static/bower/angular-ui-router/release/angular-ui-router.min.js',
+        'static/bower/angular-breadcrumb/dist/angular-breadcrumb.min.js',
+        'static/bower/ng-token-auth/dist/ng-token-auth.min.js',
+        'static/bower/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'static/bower/angular-loading-bar/build/loading-bar.min.js',
+        'static/bower/angular-relative-date/dist/angular-relative-date.min.js',
+        'static/bower/angular-dynamic-locale/dist/tmhDynamicLocale.min.js',
+        'static/bower/angular-xeditable/dist/js/xeditable.min.js',
+        'static/bower/angularfire/dist/angularfire.min.js'
     ],
     srcAngular: [
     'static/app/app.js',
@@ -35,20 +36,31 @@ var paths = {
     'static/app/MainController.js',
     'static/app/association/AssociationController.js',
     'static/app/association/AssociationDetailController.js'
+    ],
+    srcCss: [
+        'static/bower/angular-material/angular-material.css',
+        'static/bower/angular-material-data-table/dist/md-data-table.css',
+        'static/bower/angular-loading-bar/build/loading-bar.css',
+        'static/bower/angular-xeditable/dist/css/xeditable.css'
     ]
 };
 
 gulp.task('libsbundle', function() {
     return  gulp.src(paths.srcLibs)
         .pipe(concat('lib.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('static/app/'))
+        .pipe(gulp.dest('static/build/'))
 });
 
 gulp.task('concatAngular', function() {
     return gulp.src(paths.srcAngular)
         .pipe(concat('yt.js'))
-        .pipe(gulp.dest('static/app/'))
+        .pipe(gulp.dest('static/build/'))
 });
 
-gulp.task('default', ['libsbundle', 'concatAngular']);
+gulp.task('cssbundle', function() {
+    return gulp.src(paths.srcCss)
+        .pipe(concatCss('lib.css'))
+        .pipe(gulp.dest('static/build'))
+});
+
+gulp.task('default', ['libsbundle', 'concatAngular', 'cssbundle']);

@@ -10,22 +10,28 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-    <link rel="stylesheet" href="{% static "bower/angular-material/angular-material.css" %}" media="all">
-    <link rel="stylesheet" href="{% static "bower/angular-material-data-table/dist/md-data-table.css" %}">
-    <link rel="stylesheet" href="{% static "bower/angular-loading-bar/build/loading-bar.css" %}" media="all">
-    <link rel="stylesheet" href="{% static "bower/angular-xeditable/dist/css/xeditable.css" %}">
+    <link rel="stylesheet" href="{% static "build/lib.css" %}" media="all">
     <link rel="stylesheet" href="{% static "css/app.css" %}">
 
     <!-- Firebase -->
     <script src="{% static "bower/firebase/firebase.js" %}"></script>
 
-    <!-- AngularJS libs. Watch gulpfile.js to see the full list -->
-
-    <script src="{% static "app/lib.js" %}"></script>
+    <!-- AngularJS libs. See gulpfile.js to see the full list -->
+    <script src="{% static "build/lib.js" %}"></script>
 
     <!-- AngularJS app scripts -->
-    <script src="{% static "app/yt.js" %}"></script>
+    <script src="{% static "build/yt.js" %}"></script>
+
+    <!-- Firebase init -->
+    <script>
+        var config = {
+            apiKey: "AIzaSyAvMwG5MarHbMvgzJg4pa9oorxKeHBuZA8",
+            authDomain: "your-tournament.firebaseapp.com",
+            databaseURL: "https://your-tournament.firebaseio.com",
+            storageBucket: "your-tournament.appspot.com",
+        };
+        firebase.initializeApp(config);
+    </script>
 
     <base href="/" />
 </head>
