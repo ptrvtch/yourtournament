@@ -45,22 +45,28 @@ var paths = {
     ]
 };
 
-gulp.task('libsbundle', function() {
+gulp.task('libs', function() {
     return  gulp.src(paths.srcLibs)
         .pipe(concat('lib.js'))
         .pipe(gulp.dest('static/build/'))
 });
 
-gulp.task('concatAngular', function() {
+gulp.task('angular', function() {
     return gulp.src(paths.srcAngular)
         .pipe(concat('yt.js'))
         .pipe(gulp.dest('static/build/'))
 });
 
-gulp.task('cssbundle', function() {
+gulp.task('css', function() {
     return gulp.src(paths.srcCss)
         .pipe(concatCss('lib.css'))
         .pipe(gulp.dest('static/build'))
 });
 
-gulp.task('default', ['libsbundle', 'concatAngular', 'cssbundle']);
+gulp.task('watch', function() {
+    gulp.watch(paths.srcLibs, ['libs']);
+    gulp.watch(paths.srcAngular, ['angular']);
+    gulp.watch(paths.srcCss, ['css']);
+});
+
+gulp.task('default', ['watch']);
