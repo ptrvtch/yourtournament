@@ -12,7 +12,8 @@
                               blur="submit"
                               e-form="editNameForm"
                               onshow="vm.storeAsscn(association)"
-                              onaftersave="vm.editAssociation(association)"
+                              ng-click="$event.stopPropagation()"
+                              onaftersave="vm.editAssociation(association); $event.stopPropagation()"
                               class="md-headline">
                                 {$ association.name $}
                         </span>

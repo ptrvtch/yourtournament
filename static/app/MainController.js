@@ -38,15 +38,13 @@
         }
 
         vm.logout = function() {
-            AuthFactory.logout().then(function() {
-                $localStorage.user = null;
-                $localStorage.token = null;
-                $state.go('main.index');
-            })
+            AuthFactory.logout();
+            $state.go('main');
+
         };
 
         vm.isAuthenticated = function() {
-            return !!$localStorage.user;
+            return !!AuthFactory.getCurrentUser();
         };
 
         vm.setLanguage = function(lang) {
@@ -55,10 +53,10 @@
         };
 
         vm.activate = function() {
+            vm.user = AuthFactory.getCurrentUser();
+            console.log(vm.user);
             $translate.use('ru');
             tmhDynamicLocale.set('ru');
-            vm.user = $localStorage.user;
-            $state.go('main.index');
         };
 
         vm.activate();

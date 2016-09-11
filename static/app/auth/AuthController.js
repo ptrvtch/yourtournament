@@ -5,58 +5,46 @@
         .module('yt')
         .controller('AuthController', AuthController);
 
-    AuthController.$inject = ['$mdDialog', '$state', 'AuthFactory', '$localStorage', 'active'];
+    AuthController.$inject = ['$mdDialog', '$state', 'AuthFactory', '$localStorage'];
 
-    function AuthController($mdDialog, $state, AuthFactory, $localStorage, active) {
+    function AuthController($mdDialog, $state, AuthFactory, $localStorage) {
         var vm = this;
         
         vm.signup = signup;
         vm.cancel = cancel;
         vm.signupValid = signupValid;
-        vm.login = login;
-        vm.active = active;
 
         function signup() {
-            AuthFactory.register(vm.email, vm.username, vm.password1, vm.password2).then(function(response) {
-                authSuccess(response.data);
+            AuthFactory.login(vm.email, vm.password).then(function(user) {
+                authSuccess(user);
             },
             function(errors) {
-                console.log(errors.data);
-                processErrors(errors.data);
-            })
-        }
-        
-        function login() {
-            AuthFactory.login(vm.username, vm.password).then(function(response) {
-                authSuccess(response.data);
-            },
-            function(errors) {
-                console.log(errors.data);
-                processErrors(errors.data);
+                if (errors.code == 'auth/user-not-found') {
+                    AuthFactory.register(vm.email, vm.password).then(function(user){
+                        authSuccess(user);
+                    },
+                    function(errors) {
+                        console.log(errors);
+                    })
+                }
             })
         }
 
         function cancel() {
             $mdDialog.cancel('cancel');
         }
-        
-        function processErrors(errorsData) {
-            vm.errors = errorsData;
-            if (errorsData["non_field_errors"])
-                vm.non_field_errors = errorsData["non_field_errors"].toString();
-        }
 
         function signupValid() {
-            return (!((vm.password1 != vm.password2) || !vm.email || !vm.username));
+            return (!vm.email || !vm.password);
         }
 
-        function authSuccess(data) {
-            $localStorage.token = data.key;
-            AuthFactory.getCurrentUser().then(function(res){
-                $localStorage.user = res.data;
-                $state.go('main.asscns.list');
-                $mdDialog.hide($localStorage.user);
-            })
+        function authSuccess(user) {
+            vm.user = user;
+            console.log(user);
+            var currentUser = AuthFactory.getCurrentUser();
+            $state.go('main.asscns.list');
+            $mdDialog.hide();
+
         }
 
         function activate() {

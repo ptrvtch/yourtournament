@@ -5,25 +5,26 @@
         .module('yt')
         .factory('ApiFactory', ApiFactory);
 
-    ApiFactory.$inject = ['$http', '$localStorage'];
+    ApiFactory.$inject = ['$firebaseObject', '$firebaseArray', '$firebaseAuth'];
 
-    function ApiFactory($http, $localStorage) {
+    function ApiFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
+        var uid = $firebaseAuth().$getAuth().uid;
+        var user = $firebaseObject(firebase.database().ref('users/'+uid));
+        var asscns = $firebaseArray(firebase.database().ref('users/'+uid+'/associations/'));
 
         var associations = {
             get: function(id) {
-                if (id) {
-                    return $http.get('/api/associations/' + id);
-                }
-                return $http.get('/api/associations/my/')
+                return asscns.$loaded();
             },
             create: function(data) {
-                return $http.post('/api/associations/', data);
+                data.created = Date.now();
+                return asscns.$add(data);
             },
-            delete: function(id) {
-                return $http.delete('/api/associations/' + id)
+            delete: function(asscn) {
+                return asscns.$remove(asscn)
             },
-            edit: function(id, data) {
-                return $http.patch('/api/associations/' + id + '/', data)
+            edit: function(asscn) {
+                return asscns.$save(asscn)
             }
         };
 

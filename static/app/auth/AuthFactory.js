@@ -5,32 +5,24 @@
         .module('yt')
         .factory('AuthFactory', AuthFactory);
 
-    AuthFactory.$inject = ['$localStorage', '$http'];
+    AuthFactory.$inject = ['$localStorage', '$http', '$firebaseAuth'];
 
-    function AuthFactory($localStorage, $http) {
-        function register(email, username, password1, password2) {
-            return $http.post('/rest-auth/registration/', {
-                "username": username,
-                "email": email,
-                "password1": password1,
-                "password2": password2
-            })
+    function AuthFactory($localStorage, $http, $firebaseAuth) {
+        var Auth = $firebaseAuth();
+        function register(email, password) {
+            return Auth.$createUserWithEmailAndPassword(email, password)
         }
 
-        function login(username, password) {
-            return $http.post('/rest-auth/login/', {
-                "username": username,
-                "password": password
-            })
+        function login(email, password) {
+            return Auth.$signInWithEmailAndPassword(email, password)
         }
 
         function logout() {
-            delete $localStorage.token;
-            return $http.post('/rest-auth/logout/');
+            return Auth.$signOut();
         }
 
         function getCurrentUser() {
-            return $http.get('/rest-auth/user/');
+            return Auth.$getAuth();
         }
 
         return {
