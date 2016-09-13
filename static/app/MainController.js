@@ -53,7 +53,7 @@
         };
 
         vm.activate = function() {
-            vm.user = AuthFactory.getCurrentUser();
+            vm.user = AuthFactory.getCurrentUser().providerData[0];
             console.log(vm.user);
             $translate.use('ru');
             tmhDynamicLocale.set('ru');
