@@ -61,6 +61,8 @@
   "as.confirmDeleteText2": "Отменить данное действие будет невозможно.\nВы уверены?",
   "as.createLeagueHeader": "Создать лигу",
   "lg.name": "Имя",
+  "lg.teams": "Команды",
+  "lg.delete": "Удалить лигу",
   "lg.created": "Создана",
   "lg.desc": "Описание"
 }
