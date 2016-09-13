@@ -1,4 +1,4 @@
-<section layout-padding layout="column"
+<section layout-padding flex layout="column"
          md-swipe-left="vm.toggleSideNav()"
          md-swipe-right="vm.toggleSideNav()">
     <md-sidenav md-component-id="sidenav">
@@ -6,9 +6,12 @@
             <md-subheader>
                 {$ 'main.associations' | translate $}
             </md-subheader>
-            <md-list-item ng-repeat="asscn in vm.all" class="md-list-item-hover pointer">
-                <div class="md-list-item-text">
-                    <h3 ui-sref="main.asscns.detail({'id': asscn.id})">{$ asscn.name $}</h3>
+            <md-list-item ng-repeat="asscn in vm.all" class="item-hover" layout="column">
+                <div class="md-list-item-text  pointer">
+                    <h3 ui-sref="main.asscns.detail({'id': asscn.$id})">{$ asscn.name $} {$ ('['+asscn.leagues.length+']') || '' $}</h3>
+                </div>
+                <div class="md-list-item-text" ng-repeat="league in asscn.leagues">
+                    <span>{$ league.name $}</span>
                 </div>
             </md-list-item>
         </md-list>

@@ -9,6 +9,7 @@ var paths = {
         'static/bower/angular-aria/angular-aria.min.js',
         'static/bower/angular-animate/angular-animate.min.js',
         'static/bower/angular-material/angular-material.min.js',
+        'static/bower/angular-messages/angular-messages.min.js',
         'static/bower/angular-material-data-table/dist/md-data-table.min.js',
         'static/bower/angular-translate/angular-translate.min.js',
         'static/bower/angular-translate-loader-url/angular-translate-loader-url.min.js',

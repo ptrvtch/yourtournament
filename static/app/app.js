@@ -13,6 +13,7 @@
             'relativeDate',
             'tmh.dynamicLocale',
             'ngMaterial',
+            'ngMessages',
             'xeditable',
             'firebase'
         ])
@@ -65,7 +66,7 @@
             .state('main.asscns', {
                 abstract: true,
                 url: '/associations',
-                template: '<ui-view/>',
+                template: '<ui-view flex layout="column"/>',
                 ncyBreadcrumb: {
                     skip: true
                 }
