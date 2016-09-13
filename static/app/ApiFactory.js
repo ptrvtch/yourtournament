@@ -9,11 +9,14 @@
 
     function ApiFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
         var uid = $firebaseAuth().$getAuth().uid;
-        var user = $firebaseObject(firebase.database().ref('users/'+uid));
-        var asscns = $firebaseArray(firebase.database().ref('users/'+uid+'/associations/'));
+
+        var userRef = firebase.database().ref('users/'+uid);
+        var associationsRef = userRef.child("associations");
+        var user = $firebaseObject(userRef);
+        var asscns = $firebaseArray(associationsRef);
 
         var associations = {
-            get: function(id) {
+            get: function() {
                 return asscns.$loaded();
             },
             create: function(data) {
@@ -28,8 +31,17 @@
             }
         };
 
+        var leagues = {
+            create: function(data, asscnId) {
+                var leaguesRef = userRef.child("associations/"+asscnId+"/leagues/");
+                var leagues = $firebaseArray(leaguesRef);
+                return leagues.$add(data);
+            }
+        };
+
         return {
-            associations: associations
+            associations: associations,
+            leagues: leagues
         }
     }
 })();
