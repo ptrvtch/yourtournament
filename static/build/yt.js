@@ -346,7 +346,7 @@
         vm.activate = function() {
             var user = AuthFactory.getCurrentUser();
             if (user) {
-                vm.user = AuthFactory.getCurrentUser().providerData[0];
+            vm.user = AuthFactory.getCurrentUser().providerData[0];
             }
             $translate.use('ru');
             tmhDynamicLocale.set('ru');
