@@ -1,5 +1,6 @@
 <md-content>
     <md-button ng-disabled="$last"
                href="{$ step.ncyBreadcrumbLink$}"
+               aria-label="{$ step.ncyBreadcrumbLabel $}"
                ng-repeat="step in steps">{$ step.ncyBreadcrumbLabel $}</md-button>
 </md-content>

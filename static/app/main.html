@@ -1,11 +1,8 @@
-<div class="main">
+<div class="main" flex layout="column">
     <md-content>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2><a ui-sref="main.index">Your Tournament</a></h2>
-                <md-button ng-repeat="lang in vm.languages" ng-click="vm.setLanguage(lang.val)">
-                    {$ lang.name $}
-                </md-button>
                 <span flex></span>
                 <md-button ui-sref="main.profile"
                            ng-show="vm.isAuthenticated()"
@@ -38,5 +35,5 @@
 
     <div ncy-breadcrumb></div>
 
-    <div ui-view></div>
+    <div ui-view flex layout="column"></div>
 </div>

@@ -1,7 +1,11 @@
 <div class="container-fluid">
     <div class="jumbotron">
         <div class="container">
-            <h2>{$ 'auth.welcome' | translate $} {$ vm.user.username $}</h2>
+            <h2>{$ 'auth.welcome' | translate $} {$ vm.user.uid $}</h2>
+
+                <md-button ng-repeat="lang in vm.languages" ng-click="vm.setLanguage(lang.val)">
+                    {$ lang.val $}
+                </md-button>
         </div>
     </div>
 </div>
