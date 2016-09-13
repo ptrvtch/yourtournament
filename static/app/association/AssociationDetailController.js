@@ -6,34 +6,16 @@
         .controller('AssociationDetailController', AssociationDetailController)
         .controller('AssociationDetailModalController', AssociationDetailModalController);
 
-    AssociationDetailController.$inject = ['ApiFactory', '$mdDialog', '$scope', '$state', '$stateParams', '$localStorage', '$mdSidenav'];
-    AssociationDetailModalController.$inject = ['ApiFactory', '$mdDialog'];
+    AssociationDetailController.$inject = ['ApiFactory', '$mdDialog', '$mdToast', '$state', '$stateParams', '$localStorage', '$mdSidenav'];
+    AssociationDetailModalController.$inject = ['Association', '$mdDialog', 'ApiFactory'];
 
-    function AssociationDetailController(ApiFactory, $mdDialog, $scope, $state, $stateParams, $localStorage, $mdSidenav) {
+    function AssociationDetailController(ApiFactory, $mdDialog, $mdToast, $state, $stateParams, $localStorage, $mdSidenav) {
         var vm = this;
         vm.toggleSideNav = toggleSideNav;
         vm.addLeague = addLeague;
         
         function toggleSideNav() {
             $mdSidenav('sidenav').toggle();
-        }
-
-
-        function deleteAssociation(association) {
-            vm.associationToDelete = association;
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: '/static/app/association/delete.html',
-                controller: 'AssociationModalController as vm',
-                size: 'md',
-                resolve: {
-                    toDelete: association
-                }
-            });
-
-            modalInstance.result.then(function(response) {
-                $state.go('main.asscns.list');
-            })
         }
         
         function addLeague(ev) {
@@ -42,16 +24,20 @@
                 controller: 'AssociationDetailModalController as vm',
                 targetEvent: ev,
                 clickOutsideToClose: true,
-                escapeToClose: true
+                escapeToClose: true,
+                locals: {
+                    Association: vm.association
+                }
             }).then(function(){
                 $mdToast.showSimple('League added!');
             });
         }
 
         function activate() {
-            vm.all = $localStorage.associations;
-            ApiFactory.associations.get($stateParams.id).then(function(res) {
-                vm.association = res.data;
+            ApiFactory.associations.get().then(function(asscns) {
+                vm.all = asscns;
+                vm.association = asscns.$getRecord($stateParams.id);
+                console.log(vm.association);
             }, function(err) {
                 console.warn(err);
             });
@@ -60,17 +46,35 @@
         activate();
     }
 
-    function AssociationDetailModalController(ApiFactory, $mdDialog) {
+    function AssociationDetailModalController(Association, $mdDialog, ApiFactory) {
         var vm = this;
+        console.log(Association);
         vm.cancel = cancel;
-        vm.create = create;
+        vm.addTeam = addTeam;
+        vm.createLeague = createLeague;
+        vm.league = {
+            teams: []
+        };
+        vm.currentValue = '';
 
         function cancel() {
             $mdDialog.cancel('cancel');
         }
 
-        function create() {
-            
+        function addTeam() {
+            if (vm.league.teams.indexOf(vm.currentValue) == -1) {
+                vm.league.teams.push(vm.currentValue);
+                vm.currentValue = '';
+            } else {
+                vm.errorText = 'Team with this name already exists!'
+            }
+        }
+
+
+        function createLeague() {
+            ApiFactory.leagues.create(vm.league, Association.$id).then(function(response) {
+                console.log(response);
+            })
         }
     }
 })();

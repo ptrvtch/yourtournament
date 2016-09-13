@@ -91,10 +91,14 @@ md-grid-list {
     transform: scale(1.2);
 }
 
-.md-list-item-hover {
+.item-hover {
     transition: 0.5s;
 }
 
-.md-list-item-hover:hover {
+.item-hover:hover {
     background-color: rgba(0,0,0,0.05);
+}
+
+.md-item-small {
+    min-height: unset;
 }

@@ -1,5 +1,5 @@
 <md-dialog aria-label="{$ 'as.createLeagueHeader' | translate $}"
-           flex="80"
+           flex="50"
            flex-sm="100">
     <md-toolbar>
         <div class="md-toolbar-tools">
@@ -11,16 +11,53 @@
         </div>
     </md-toolbar>
     <md-dialog-content>
-        <md-content layout-padding>
-
+        <md-content layout-padding layout="row" layout-sm="column">
+            <div flex>
+                <md-input-container class="md-block">
+                    <label for="name">
+                        {$ 'lg.name' | translate $}
+                    </label>
+                    <input required
+                           name="name"
+                           id="name"
+                           ng-model="vm.league.name"
+                           type="text">
+                </md-input-container>
+            </div>
+            <div flex layout="column">
+                <form ng-submit="vm.addTeam()">
+                    <md-input-container class="md-block" layout="row">
+                        <label for="name">
+                            {$ 'lg.teams' | translate $}
+                        </label>
+                        <input name="teams"
+                               id="password"
+                               ng-model="vm.currentValue"
+                               type="text">
+                        <button type="submit" style="display:none"></button>
+                    </md-input-container>
+                </form>
+                <md-list class="md-dense" flex>
+                    <md-list-item class="md-item-small item-hover pointer" ng-repeat="team in vm.league.teams">
+                        <div class="md-list-item-text" layout="column">
+                            <span class="leagueTeam">
+                                {$ team $}
+                            </span>
+                        </div>
+                        <div flex></div>
+                        <md-icon class="material-icons" aria-label="Delete">clear</md-icon>
+                    </md-list-item>
+                </md-list>
+            </div>
         </md-content>
     </md-dialog-content>
     <md-dialog-actions layout="row">
+        <span>{$ vm.errorText $}</span>
         <md-button ng-click="vm.cancel()" >
             {$ 'as.cancel' | translate $}
         </md-button>
         <md-button ng-click="vm.createLeague()">
-            {$ 'as.delete' | translate $}
+            {$ 'as.add' | translate $}
         </md-button>
     </md-dialog-actions>
 </md-dialog>
