@@ -15,7 +15,8 @@
             'ngMaterial',
             'ngMessages',
             'xeditable',
-            'firebase'
+            'firebase',
+            'mdDataTable'
         ])
         .config(config)
         .run(run);
@@ -81,12 +82,21 @@
                 }
             })
             .state('main.asscns.detail', {
-                url: '/:id',
+                url: '/:asscnId',
                 templateUrl: '/static/app/association/detail.html',
                 controller: 'AssociationDetailController as vm',
                 ncyBreadcrumb: {
                     label: "{$ vm.association.name $}",
                     parent: 'main.asscns.list'
+                }
+            })
+            .state('main.asscns.league', {
+                url: '/:asscnId/:leagueId',
+                templateUrl: '/static/app/league/league.html',
+                controller: 'LeagueController as vm',
+                ncyBreadcrumb: {
+                    label: "{$ vm.league.name $}",
+                    parent: 'main.asscns.detail'
                 }
             })
             .state('main.profile', {
@@ -193,9 +203,9 @@
         .module('yt')
         .factory('ApiFactory', ApiFactory);
 
-    ApiFactory.$inject = ['$firebaseObject', '$firebaseArray', '$firebaseAuth'];
+    ApiFactory.$inject = ['$q', '$firebaseObject', '$firebaseArray', '$firebaseAuth'];
 
-    function ApiFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
+    function ApiFactory($q, $firebaseObject, $firebaseArray, $firebaseAuth) {
         var uid = $firebaseAuth().$getAuth().uid;
 
         var userRef = firebase.database().ref('users/'+uid);
@@ -204,7 +214,12 @@
         var asscns = $firebaseArray(associationsRef);
 
         var associations = {
-            get: function() {
+            get: function(id) {
+                if (id) {
+                    var ref = associationsRef.child(id);
+                    var asscn = $firebaseObject(ref);
+                    return asscn.$loaded();
+                }
                 return asscns.$loaded();
             },
             create: function(data) {
@@ -224,6 +239,16 @@
                 var leaguesRef = userRef.child("associations/"+asscnId+"/leagues/");
                 var leagues = $firebaseArray(leaguesRef);
                 return leagues.$add(data);
+            },
+            get: function(asscnId, leagueId) {
+                var leaguesRef = userRef.child("associations/"+asscnId+"/leagues/");
+                if (leagueId) {
+                    var ref = leaguesRef.child(leagueId);
+                    var league = $firebaseObject(ref);
+                    return league.$loaded();
+                }
+                var leagues = $firebaseArray(leaguesRef);
+                return leagues.$loaded();
             }
         };
 
@@ -346,7 +371,7 @@
         vm.activate = function() {
             var user = AuthFactory.getCurrentUser();
             if (user) {
-            vm.user = AuthFactory.getCurrentUser().providerData[0];
+                vm.user = AuthFactory.getCurrentUser().providerData[0];
             }
             $translate.use('ru');
             tmhDynamicLocale.set('ru');
@@ -363,10 +388,10 @@
         .controller('AssociationController', AssociationController)
         .controller('AssociationModalController', AssociationModalController);
 
-    AssociationController.$inject = ['ApiFactory', '$mdDialog', '$firebaseArray', '$mdToast'];
+    AssociationController.$inject = ['ApiFactory', '$mdDialog', '$firebaseArray', '$mdToast', '$localStorage'];
     AssociationModalController.$inject = ['$mdDialog', 'toDelete', 'ApiFactory'];
 
-    function AssociationController(ApiFactory, $mdDialog, $firebaseArray, $mdToast) {
+    function AssociationController(ApiFactory, $mdDialog, $firebaseArray, $mdToast, $localStorage) {
         var vm = this;
         vm.createAssociation = createAssociation;
         vm.addNewAssociation = addNewAssociation;
@@ -432,6 +457,7 @@
         function getMyAssociations() {
             ApiFactory.associations.get().then(function(response) {
                 vm.associations = response;
+                $localStorage.associations = vm.associations;
             })
         }
 
@@ -493,10 +519,10 @@
         .controller('AssociationDetailController', AssociationDetailController)
         .controller('AssociationDetailModalController', AssociationDetailModalController);
 
-    AssociationDetailController.$inject = ['ApiFactory', '$mdDialog', '$mdToast', '$state', '$stateParams', '$localStorage', '$mdSidenav'];
-    AssociationDetailModalController.$inject = ['Association', '$mdDialog', 'ApiFactory'];
+    AssociationDetailController.$inject = ['ApiFactory', '$mdDialog', '$mdToast', '$state', '$stateParams', '$localStorage', '$mdSidenav', '$log'];
+    AssociationDetailModalController.$inject = ['$stateParams', '$mdDialog', 'ApiFactory'];
 
-    function AssociationDetailController(ApiFactory, $mdDialog, $mdToast, $state, $stateParams, $localStorage, $mdSidenav) {
+    function AssociationDetailController(ApiFactory, $mdDialog, $mdToast, $state, $stateParams, $localStorage, $mdSidenav, $log) {
         var vm = this;
         vm.toggleSideNav = toggleSideNav;
         vm.addLeague = addLeague;
@@ -511,31 +537,30 @@
                 controller: 'AssociationDetailModalController as vm',
                 targetEvent: ev,
                 clickOutsideToClose: true,
-                escapeToClose: true,
-                locals: {
-                    Association: vm.association
-                }
+                escapeToClose: true
             }).then(function(){
                 $mdToast.showSimple('League added!');
             });
         }
 
         function activate() {
-            ApiFactory.associations.get().then(function(asscns) {
-                vm.all = asscns;
-                vm.association = asscns.$getRecord($stateParams.id);
-                console.log(vm.association);
-            }, function(err) {
-                console.warn(err);
+            $log.info($stateParams);
+            vm.all = $localStorage.associations;
+            ApiFactory.associations.get($stateParams.asscnId).then(function(asscn) {
+                vm.association = asscn;
+                $log.info(asscn);
+            });
+            ApiFactory.leagues.get($stateParams.asscnId).then(function(leagues) {
+                vm.leagues = leagues;
+                $log.info(leagues);
             });
         }
 
         activate();
     }
 
-    function AssociationDetailModalController(Association, $mdDialog, ApiFactory) {
+    function AssociationDetailModalController($stateParams, $mdDialog, ApiFactory) {
         var vm = this;
-        console.log(Association);
         vm.cancel = cancel;
         vm.addTeam = addTeam;
         vm.createLeague = createLeague;
@@ -559,9 +584,34 @@
 
 
         function createLeague() {
-            ApiFactory.leagues.create(vm.league, Association.$id).then(function(response) {
+            ApiFactory.leagues.create(vm.league, $stateParams.leagueId).then(function(response) {
                 console.log(response);
             })
         }
+    }
+})();
+(function () {
+    'use strict';
+
+    angular
+        .module('yt')
+        .controller('LeagueController', LeagueController);
+
+    LeagueController.$inject = ['$q','ApiFactory', '$stateParams'];
+
+    function LeagueController($q, ApiFactory, $stateParams) {
+        var vm = this;
+
+        function activate() {
+            $q.all([
+                ApiFactory.associations.get($stateParams['asscnId']),
+                ApiFactory.leagues.get($stateParams['asscnId'], $stateParams['leagueId'])
+            ]).then(function(result) {
+                vm.association = result[0];
+                vm.league = result[1];
+            })
+        }
+
+        activate();
     }
 })();
