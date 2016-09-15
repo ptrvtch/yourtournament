@@ -6,10 +6,10 @@
         .controller('AssociationController', AssociationController)
         .controller('AssociationModalController', AssociationModalController);
 
-    AssociationController.$inject = ['ApiFactory', '$mdDialog', '$firebaseArray', '$mdToast'];
+    AssociationController.$inject = ['ApiFactory', '$mdDialog', '$firebaseArray', '$mdToast', '$localStorage'];
     AssociationModalController.$inject = ['$mdDialog', 'toDelete', 'ApiFactory'];
 
-    function AssociationController(ApiFactory, $mdDialog, $firebaseArray, $mdToast) {
+    function AssociationController(ApiFactory, $mdDialog, $firebaseArray, $mdToast, $localStorage) {
         var vm = this;
         vm.createAssociation = createAssociation;
         vm.addNewAssociation = addNewAssociation;
@@ -75,6 +75,7 @@
         function getMyAssociations() {
             ApiFactory.associations.get().then(function(response) {
                 vm.associations = response;
+                $localStorage.associations = vm.associations;
             })
         }
 

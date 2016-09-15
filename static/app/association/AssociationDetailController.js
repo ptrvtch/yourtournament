@@ -7,7 +7,7 @@
         .controller('AssociationDetailModalController', AssociationDetailModalController);
 
     AssociationDetailController.$inject = ['ApiFactory', '$mdDialog', '$mdToast', '$state', '$stateParams', '$localStorage', '$mdSidenav'];
-    AssociationDetailModalController.$inject = ['Association', '$mdDialog', 'ApiFactory'];
+    AssociationDetailModalController.$inject = ['$stateParams', '$mdDialog', 'ApiFactory'];
 
     function AssociationDetailController(ApiFactory, $mdDialog, $mdToast, $state, $stateParams, $localStorage, $mdSidenav) {
         var vm = this;
@@ -24,19 +24,21 @@
                 controller: 'AssociationDetailModalController as vm',
                 targetEvent: ev,
                 clickOutsideToClose: true,
-                escapeToClose: true,
-                locals: {
-                    Association: vm.association
-                }
+                escapeToClose: true
             }).then(function(){
                 $mdToast.showSimple('League added!');
             });
         }
 
         function activate() {
+            vm.all = $localStorage.associations;
+            ApiFactory.leagues.get($stateParams.id).then(function(leagues) {
+                vm.leagues = leagues;
+            });
             ApiFactory.associations.get().then(function(asscns) {
                 vm.all = asscns;
                 vm.association = asscns.$getRecord($stateParams.id);
+                console.log(vm.association.leagues);
                 console.log(vm.association);
             }, function(err) {
                 console.warn(err);
@@ -46,7 +48,7 @@
         activate();
     }
 
-    function AssociationDetailModalController(Association, $mdDialog, ApiFactory) {
+    function AssociationDetailModalController($stateParams, $mdDialog, ApiFactory) {
         var vm = this;
         console.log(Association);
         vm.cancel = cancel;
@@ -72,7 +74,7 @@
 
 
         function createLeague() {
-            ApiFactory.leagues.create(vm.league, Association.$id).then(function(response) {
+            ApiFactory.leagues.create(vm.league, $stateParams.id).then(function(response) {
                 console.log(response);
             })
         }

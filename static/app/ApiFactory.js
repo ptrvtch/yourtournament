@@ -36,6 +36,11 @@
                 var leaguesRef = userRef.child("associations/"+asscnId+"/leagues/");
                 var leagues = $firebaseArray(leaguesRef);
                 return leagues.$add(data);
+            },
+            get: function(asscnId) {
+                var leaguesRef = userRef.child("associations/"+asscnId+"/leagues/");
+                var leagues = $firebaseArray(leaguesRef);
+                return leagues.$loaded();
             }
         };
 
