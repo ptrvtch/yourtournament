@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    'sslserver',
     'rest_framework',
     'rest_framework_swagger',
     'rest_framework.authtoken',
@@ -146,4 +147,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+SECURE_SSL_REDIRECT = False
 

@@ -53,8 +53,10 @@
         };
 
         vm.activate = function() {
-            vm.user = AuthFactory.getCurrentUser().providerData[0];
-            console.log(vm.user);
+            var user = AuthFactory.getCurrentUser();
+            if (user) {
+                vm.user = AuthFactory.getCurrentUser().providerData[0];
+            }
             $translate.use('ru');
             tmhDynamicLocale.set('ru');
         };
