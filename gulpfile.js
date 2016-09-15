@@ -30,13 +30,14 @@ var paths = {
         'static/bower/angularfire/dist/angularfire.min.js'
     ],
     srcAngular: [
-    'static/app/app.js',
-    'static/app/auth/AuthFactory.js',
-    'static/app/ApiFactory.js',
-    'static/app/auth/AuthController.js',
-    'static/app/MainController.js',
-    'static/app/association/AssociationController.js',
-    'static/app/association/AssociationDetailController.js'
+        'static/app/app.js',
+        'static/app/auth/AuthFactory.js',
+        'static/app/ApiFactory.js',
+        'static/app/auth/AuthController.js',
+        'static/app/MainController.js',
+        'static/app/association/AssociationController.js',
+        'static/app/association/AssociationDetailController.js',
+        'static/app/league/LeagueController.js'
     ],
     srcCss: [
         'static/bower/angular-material/angular-material.css',
@@ -70,4 +71,4 @@ gulp.task('watch', function() {
     gulp.watch(paths.srcCss, ['css']);
 });
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['watch', 'libs', 'angular', 'css']);

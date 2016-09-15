@@ -6,10 +6,10 @@
         .controller('AssociationDetailController', AssociationDetailController)
         .controller('AssociationDetailModalController', AssociationDetailModalController);
 
-    AssociationDetailController.$inject = ['ApiFactory', '$mdDialog', '$mdToast', '$state', '$stateParams', '$localStorage', '$mdSidenav'];
+    AssociationDetailController.$inject = ['ApiFactory', '$mdDialog', '$mdToast', '$state', '$stateParams', '$localStorage', '$mdSidenav', '$log'];
     AssociationDetailModalController.$inject = ['$stateParams', '$mdDialog', 'ApiFactory'];
 
-    function AssociationDetailController(ApiFactory, $mdDialog, $mdToast, $state, $stateParams, $localStorage, $mdSidenav) {
+    function AssociationDetailController(ApiFactory, $mdDialog, $mdToast, $state, $stateParams, $localStorage, $mdSidenav, $log) {
         var vm = this;
         vm.toggleSideNav = toggleSideNav;
         vm.addLeague = addLeague;
@@ -31,17 +31,15 @@
         }
 
         function activate() {
+            $log.info($stateParams);
             vm.all = $localStorage.associations;
-            ApiFactory.leagues.get($stateParams.id).then(function(leagues) {
-                vm.leagues = leagues;
+            ApiFactory.associations.get($stateParams.asscnId).then(function(asscn) {
+                vm.association = asscn;
+                $log.info(asscn);
             });
-            ApiFactory.associations.get().then(function(asscns) {
-                vm.all = asscns;
-                vm.association = asscns.$getRecord($stateParams.id);
-                console.log(vm.association.leagues);
-                console.log(vm.association);
-            }, function(err) {
-                console.warn(err);
+            ApiFactory.leagues.get($stateParams.asscnId).then(function(leagues) {
+                vm.leagues = leagues;
+                $log.info(leagues);
             });
         }
 
@@ -50,7 +48,6 @@
 
     function AssociationDetailModalController($stateParams, $mdDialog, ApiFactory) {
         var vm = this;
-        console.log(Association);
         vm.cancel = cancel;
         vm.addTeam = addTeam;
         vm.createLeague = createLeague;
@@ -74,7 +71,7 @@
 
 
         function createLeague() {
-            ApiFactory.leagues.create(vm.league, $stateParams.id).then(function(response) {
+            ApiFactory.leagues.create(vm.league, $stateParams.leagueId).then(function(response) {
                 console.log(response);
             })
         }

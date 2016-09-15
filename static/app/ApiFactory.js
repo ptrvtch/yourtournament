@@ -5,9 +5,9 @@
         .module('yt')
         .factory('ApiFactory', ApiFactory);
 
-    ApiFactory.$inject = ['$firebaseObject', '$firebaseArray', '$firebaseAuth'];
+    ApiFactory.$inject = ['$q', '$firebaseObject', '$firebaseArray', '$firebaseAuth'];
 
-    function ApiFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
+    function ApiFactory($q, $firebaseObject, $firebaseArray, $firebaseAuth) {
         var uid = $firebaseAuth().$getAuth().uid;
 
         var userRef = firebase.database().ref('users/'+uid);
@@ -16,7 +16,12 @@
         var asscns = $firebaseArray(associationsRef);
 
         var associations = {
-            get: function() {
+            get: function(id) {
+                if (id) {
+                    var ref = associationsRef.child(id);
+                    var asscn = $firebaseObject(ref);
+                    return asscn.$loaded();
+                }
                 return asscns.$loaded();
             },
             create: function(data) {
@@ -37,8 +42,13 @@
                 var leagues = $firebaseArray(leaguesRef);
                 return leagues.$add(data);
             },
-            get: function(asscnId) {
+            get: function(asscnId, leagueId) {
                 var leaguesRef = userRef.child("associations/"+asscnId+"/leagues/");
+                if (leagueId) {
+                    var ref = leaguesRef.child(leagueId);
+                    var league = $firebaseObject(ref);
+                    return league.$loaded();
+                }
                 var leagues = $firebaseArray(leaguesRef);
                 return leagues.$loaded();
             }

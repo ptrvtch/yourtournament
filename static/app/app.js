@@ -81,12 +81,21 @@
                 }
             })
             .state('main.asscns.detail', {
-                url: '/:id',
+                url: '/:asscnId',
                 templateUrl: '/static/app/association/detail.html',
                 controller: 'AssociationDetailController as vm',
                 ncyBreadcrumb: {
                     label: "{$ vm.association.name $}",
                     parent: 'main.asscns.list'
+                }
+            })
+            .state('main.asscns.league', {
+                url: '/:asscnId/:leagueId',
+                templateUrl: '/static/app/league/league.html',
+                controller: 'LeagueController as vm',
+                ncyBreadcrumb: {
+                    label: "{$ vm.league.name $}",
+                    parent: 'main.asscns.detail'
                 }
             })
             .state('main.profile', {
