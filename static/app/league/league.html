@@ -1,3 +1,23 @@
 <md-content flex layout-padding layout="column">
     <h2>{$ vm.league.name $}</h2>
+
+    <mdt-table>
+        <mdt-header-row>
+            <mdt-column>
+                #
+            </mdt-column>
+            <mdt-column>
+                Team
+            </mdt-column>
+        </mdt-header-row>
+        <mdt-row ng-repeat="team in vm.league.teams">
+            <mdt-cell>
+                {$ $index + 1 $}
+            </mdt-cell>
+            <mdt-cell>
+                {$ team $}
+            </mdt-cell>
+        </mdt-row>
+    </mdt-table>
+
 </md-content>

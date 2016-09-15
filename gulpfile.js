@@ -2,9 +2,12 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var concatCss = require('gulp-concat-css');
+var filesExist = require('files-exist');
 
 var paths = {
     srcLibs: [
+        'static/bower/jquery/dist/jquery.min.js',
+        'static/bower/lodash/lodash.min.js',
         'static/bower/angular/angular.min.js',
         'static/bower/angular-aria/angular-aria.min.js',
         'static/bower/angular-animate/angular-animate.min.js',
@@ -27,7 +30,11 @@ var paths = {
         'static/bower/angular-relative-date/dist/angular-relative-date.min.js',
         'static/bower/angular-dynamic-locale/dist/tmhDynamicLocale.min.js',
         'static/bower/angular-xeditable/dist/js/xeditable.min.js',
-        'static/bower/angularfire/dist/angularfire.min.js'
+        'static/bower/angularfire/dist/angularfire.min.js',
+        'static/bower/md-data-table/dist/md-data-table.js',
+        'static/bower/md-data-table/dist/md-data-table-templates.js',
+        'static/bower/angular-material-icons/angular-material-icons.min.js',
+        'static/bower/angular-sanitize/angular-sanitize.min.js'
     ],
     srcAngular: [
         'static/app/app.js',
@@ -43,24 +50,25 @@ var paths = {
         'static/bower/angular-material/angular-material.css',
         'static/bower/angular-material-data-table/dist/md-data-table.css',
         'static/bower/angular-loading-bar/build/loading-bar.css',
-        'static/bower/angular-xeditable/dist/css/xeditable.css'
+        'static/bower/angular-xeditable/dist/css/xeditable.css',
+        'static/bower/md-data-table/dist/md-data-table-style.css'
     ]
 };
 
 gulp.task('libs', function() {
-    return  gulp.src(paths.srcLibs)
+    return  gulp.src(filesExist(paths.srcLibs))
         .pipe(concat('lib.js'))
         .pipe(gulp.dest('static/build/'))
 });
 
 gulp.task('angular', function() {
-    return gulp.src(paths.srcAngular)
+    return gulp.src(filesExist(paths.srcAngular))
         .pipe(concat('yt.js'))
         .pipe(gulp.dest('static/build/'))
 });
 
 gulp.task('css', function() {
-    return gulp.src(paths.srcCss)
+    return gulp.src(filesExist(paths.srcCss))
         .pipe(concatCss('lib.css'))
         .pipe(gulp.dest('static/build'))
 });

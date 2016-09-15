@@ -15,7 +15,8 @@
             'ngMaterial',
             'ngMessages',
             'xeditable',
-            'firebase'
+            'firebase',
+            'mdDataTable'
         ])
         .config(config)
         .run(run);
